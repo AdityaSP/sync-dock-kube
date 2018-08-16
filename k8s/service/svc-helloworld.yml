@@ -1,0 +1,15 @@
+ 
+ #kubectl expose deployment helloworld-deployment --type=NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-service-nodeport
+spec:
+  ports:
+  - port: 8888
+    nodePort: 31001
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: helloworld
+  type: NodePort

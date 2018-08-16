@@ -1,0 +1,37 @@
+minikube start
+kubectl get node
+kubectl get pod
+kubectl create -f helloworld.yml
+kubectl port-forward nginx 9091:80
+kubectl expose pod nginx --type:NodePort --name nginx-helloworld
+minikube service nginxhelloworld-service --url
+kubectl exec nginx -- ls -ltr
+kubectl get pods --all-namespaces
+kubectl run -i --tty busybox --image=busybox --restart=Never
+    telnet 172.17.0.4 80
+        GET /
+ 
+kubectl delete pods 
+kubectl create -f helloworld-replication-controller.yml
+kubectl get replicationcontroller
+kubectl get rc
+kubectl get pods --selector=app=helloworld
+kubectl describe rc helloworld-controller
+kubectl scale --replicas=4 -f kubectl scale --replicas=3 rc/helloworld-controller
+kubectl scale --replicas=3 rc/helloworld-controller
+
+
+kubectl create -f helloworld-deployment.yml
+kubectl get deployment
+kubectl get deployments
+kubectl get rs
+kubectl describe deployment helloworld-deployment
+kubectl describe rs <rs name>
+kubectl describe pod <pod name>
+kubectl rollout status deployment/helloworld-deployment
+kubectl scale --replicas=5 deployment/helloworld-deployment
+kubectl expose deployment helloworld-deployment --type=NodePort
+kubectl set image deployment/helloworld-deployment nginx=nginx
+kubectl rollout undo deployment/helloworld-deployment
+kubectl edit deployment/helloworld-deployment
+    in the spec add revisionHistoryLimit: 5

@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - name: nginxport
+          containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-service-nodeport
+spec:
+  ports:
+  - port: 8888
+    nodePort: 31001
+    targetPort: nginxport
+    protocol: TCP
+  selector:
+    app: helloworld
+  type: NodePort
+

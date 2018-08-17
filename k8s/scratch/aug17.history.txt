@@ -1,0 +1,500 @@
+  356  kubectl get hpa
+  357  kubectl get hpa
+  358  kubectl get hpa
+  359  kubectl get hpa
+  360  kubectl get hpa
+  361  kubectl get hpa
+  362  kubectl get hpa
+  363  kubectl get hpa
+  364  kubectl get hpa
+  365  kubectl get hpa
+  366  kubectl get --help
+  367  kubectl get ns
+  368  kubectl delete ns myspace
+  369  cd resource-quota/
+  370  kubectl create -f resourcequota.yml 
+  371  kubectl create -f helloworld-no-quotas.yml 
+  372  kubectl get pods
+  373  kubectl get deployment 
+  374  kubectl get deployment -n myspace
+  375  kubectl describe deployment helloworld-deployment
+  376  kubectl describe deployment helloworld-deployment -n myspace
+  377  kubectl describe rs helloworld-deployment-558bfc7f45
+  378  kubectl describe rs -n myspace helloworld-deployment-558bfc7f45 
+  379  kubectl get deployment -n myspace
+  380  kubectl get rs -n myspace
+  381  kubectl describe rs -n myspace helloworld-deployment-558bfc7f45 
+  382  kubectl create -f defaults.yml 
+  383  kubectl describe rs -n myspace helloworld-deployment-558bfc7f45 
+  384  kubectl describe rs -n myspace helloworld-deployment-558bfc7f45 
+  385  kubectl delete -f helloworld-no-quotas.yml 
+  386  kubectl create -f helloworld-no-quotas.yml 
+  387  kubectl create -f helloworld-no-quotas.yml 
+  388  kubectl get deployments -n myspace
+  389  kubectl scale deployment helloworld-deployment -n myspace --replicas 5
+  390  kubectl get deployments -n myspace
+  391  kubectl get deployments -n myspace
+  392  kubectl get deployments -n myspace
+  393  kubectl get rs helloworld-deployment -n myspace
+  394  kubectl get rs -f helloworld-no-quotas.yml 
+  395  kubectl get rs -n myspace
+  396  kubectl describe rs -n myspace helloworld-deployment-558bfc7f45
+  397  kubectl get limits -n myspace
+  398  kubectl describe limits limits
+  399  kubectl describe limits limits -n myspace
+  400  kubectl get ResourceQuota -n myspace
+  401  kubectl describe ResourceQuota compute-quota -n myspace
+  402  kubectl delete -f helloworld-no-quotas.yml 
+  403  kubectl get ResourceQuota -n myspace
+  404  kubectl describe ResourceQuota compute-quota -n myspace
+  405  kubectl describe ResourceQuota compute-quota -n myspace kubectl get nodes --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'
+  406   kubectl get nodes --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'
+  407   kubectl get pods --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; kubectl describe pod {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'
+  408  kubectl get quota -o json
+  409  kubectl get quota compute-quota -o json
+  410  kubectl get quota compute-quota -o json -n myspace
+  411  kubectl describe ResourceQuota compute-quota -n myspace
+  412  kubectl get contexts
+  413  kubectl config get-contexts
+  414  kubectl config --help
+  415  kubectl config delete-context user1
+  416  kubectl config get-contexts
+  417  kubectl config set-credentials user1 --client-certificate="C:\Users\Dell lap\.minikube\user1.crt" --client-key="C:\Users\Dell lap\.minikube\user1.key"
+  418  kubectl config set-context user1 --cluster=minikube --user user1
+  419  kubectl config set-context user1ctx --cluster=minikube --user user1
+  420  kubectl config get-contexts
+  421  kubectl config use-context user1
+  422  kubectl get pods
+  423  kubectl config use-context minikube
+  424  cd ../user/
+  425  kubectl create - f pod-ro-role.yml 
+  426  kubectl create -f pod-ro-role.yml 
+  427  kubectl delete -f pod-ro-role.yml 
+  428  kubectl delete -f user1-pod-ro-rolebinding.yml 
+  429  kubectl delete -f pod-ro-role.yml 
+  430  kubectl create -f pod-ro-role.yml 
+  431  kubectl create -f user1-pod-ro-rolebinding.yml 
+  432  kubectl get User
+  433  minikube stop
+  434  minikube start --extra-config=apiserver.Authorization.Mode=RBAC
+  435  kubectl config get-contexts
+  436  kubectl config use-context user1
+  437  kubectl get pods
+  438  kubectl get deployments
+  439  history | tail -n 10
+  440  kubectl get pvc
+  441  kubectl config use-context minikube
+  442  kubectl get pvc
+  443  kubectl get pv
+  444  kubectl delete pvc task-pv-claim task-pv-claim1
+  445  kubectl delete pv task-pv-volume
+  446  cd ../pv-pvc/
+  447  kubectl create -f pv-pvc.yml 
+  448  kubectl get pv
+  449  kubectl describe pv mysql-pv-volume
+  450  minikube pv
+  451  minikube ip
+  452  kubectl get pvc
+  453  kubectl describe pvc mysql-pv-claim
+  454  kubectl delete -f pv-pvc.yml 
+  455  kubectl create -f pv-pvc.yml 
+  456  kubectl describe pvc mysql-pv-claim
+  457  kubectl create -f mysql-dep.yml 
+  458  kubectl get pods
+  459  kubectl describe pod mysql-544bbdcd6f-6qs5t
+  460  kubectl get pods
+  461  minikube addons enable default-storageclass
+  462  kubectl delete -f mysql-dep.yml 
+  463  kubectl delete -f pv-pvc.yml 
+  464  kubectl create -f pv-pvc.yml 
+  465  kubectl describe pvc mysql-pv-claim
+  466  kubectl delete -f mysql-dep.yml 
+  467  kubectl create -f mysql-dep.yml 
+  468  #minikube addons enable default-storageclass
+  469  exit
+  470  clear
+  471  ls
+  472  docker ls
+  473  docker ps
+  474  docker container ls -a
+  475  docker prune
+  476  docker container prune
+  477  docker image ls
+  478  docker rmi $(docker images -a --filter=dangling=true -q)
+  479  docker system prune -a
+  480  docker image ls
+  481  docker-machine env
+  482  docker container run -v "/c/Users/Dell lap/aug7":/var/log/apache2:rw --name web02 -p 80 82:80 alpine_apache2
+  483  docker container run -v "/c/Users/Dell lap/aug7":/var/log/apache2:rw --name web02 -p 8082:80 alpine_apache2
+  484  docker contain
+  485  docker container rm -f web02
+  486  docker container run -v "/c/Users/Dell lap/aug7":/var/log/apache2:rw --name web02 -p 8082:80 alpine_apache2
+  487  docker container run -v "/c/Users/Dell lap/aug7/code":/var/www/localhost/htdocs:rw --name web03 -p 8083:80 alpine_apache2
+  488  docker container exec web01 grep -i listen /etc/apache2/httpd.conf
+  489  docker container ls 
+  490  docker network prune
+  491  docker network ls
+  492  docker inspect stack_default
+  493  docker container inspect stack_web01_1
+  494  docker-machine stop
+  495  docker-machine start
+  496  exit
+  497  cd ../..
+  498  ls
+  499  clera
+  500  clear
+  501  mkdir aug13
+  502  cd aug13
+  503  ls
+  504  minikube ip
+  505  kubectl get pods
+  506  kubectl get deployments
+  507  kubectl get deployments | cut -f 1 -d " " 
+  508  kubectl delete deployment $(kubectl get deployments | cut -f 1 -d " " )
+  509  minikube docker-machine env
+  510  minikube docker-env
+  511  eval $(minikube docker-env)
+  512  docker version
+  513  which docker
+  514  clear
+  515  clear
+  516  docker info
+  517  minikube version
+  518  kubectl version
+  519  minikube version
+  520  minikube ip
+  521  minikube docker-env
+  522  minikube ip
+  523  minikube status
+  524  minikube stop
+  525  minikube start
+  526  docker image ls
+  527  minikube stop
+  528  minikube start
+  529  minikube ip
+  530  minikube stop
+  531  minikube start
+  532  minikube docker-env
+  533  eval $(minikube docker-env)
+  534  docker network ls
+  535  docker network inspect 1d9e2157d35a
+  536  minikube ip
+  537  cp -r ../aug6/ .
+  538  ls
+  539  mv aug6/* .
+  540  ls
+  541  rm -rf history_day*
+  542  rm -rf screendump.txt 
+  543  ls
+  544  kubectl version
+  545  kubectl get pods
+  546  kubectl delete rc echoheaders
+  547  kubectl delete rc nginx-ingress-controller
+  548  kubectl get rs
+  549  kubectl get rc
+  550  kubectl get pods
+  551  kubectl delete pod config-map-test
+  552  kubectl describe pod nginx-ingress-controller-m4j65
+  553  kubectl delete DaemonSet/nginx-ingress-controller
+  554  kubectl get pods
+  555  kubectl get pods
+  556  ls pod/pod-helloworld.yml 
+  557  kubectl create -f pod/pod-helloworld.yml 
+  558  kubectl get pods
+  559  kubectl describe pod my-nginx
+  560  cd pod/
+  561  ls
+  562  cat pod-helloworld.yml 
+  563  kubectl get pods
+  564  kubectl describe pod my-nginx
+  565  kubectl get pods
+  566  kubectl get pods
+  567  kubectl get pods
+  568  kubectl delete pod my-nginx
+  569  cd ..
+  570  ls
+  571  cd rc
+  572  ls
+  573  kubectl get pods
+  574  kubectl create -f rc-helloworld.yml 
+  575  kubectl get replicationcontroller
+  576  kubectl get rc
+  577  kubectl get pods
+  578  kubectl delete pod helloworld-controller-4qb6v
+  579  kubectl get pods
+  580  kubectl get pods
+  581  kubectl get pods --show-labels
+  582  kubectl get rc
+  583  kubectl delete rc helloworld-controller
+  584  kubectl get pods
+  585  cd ..
+  586  kubectl create -f pod/pod-helloworld.yml 
+  587  kubectl get pods --show-labels
+  588  kubectl create -f rc/rc-helloworld.yml 
+  589  kubectl get pods --show-labels
+  590  kubectl delete pod my-nginx
+  591  kubectl get pods --show-labels
+  592  kubectl scale rc helloworld-controller --replicas 5
+  593  kubectl get pods --show-labels
+  594  kubectl get rc helloworld-controller -o yaml
+  595  history | tail -n 10
+  596  kubectl scale rc helloworld-controller --replicas 0
+  597  kubectl scale rc helloworld-controller --replicas 3
+  598  kubectl edit rc helloworld-controller
+  599  kubectl get pods --show-labels -o wide
+  600  cd deployment/
+  601  ls
+  602  mv *.yml old/
+  603  cp old/dep-helloworld.yml .
+  604  vi dep-helloworld.yml 
+  605  cat dep-helloworld.yml 
+  606  mv old ../backup
+  607  ls
+  608  kubectl delete rc helloworld-controller
+  609  kubectl get pods
+  610  kubectl create -f dep-helloworld.yml 
+  611  kubectl get pods
+  612  kubectl get deploy "helloworld-deployment"
+  613  kubectl describe deploy "helloworld-deployment"
+  614  kubectl get rs helloworld-deployment-bf5b9bc9d
+  615  kubectl describe rs helloworld-deployment-bf5b9bc9d
+  616  kubectl get pods 
+  617  history | tail -n 10
+  618  kubect get pods --show-labels
+  619  kubectl get pods --show-labels
+  620  history | tail -n 10
+  621  minikube version
+  622  kubectl scale deployment helloworld-deployment --replicas 3
+  623  kubectl get pods
+  624  kubectl expose deployment "helloworld-deployment" --type=NodePort
+  625  kubectl get service "helloworld-deployment"
+  626  kubectl get svc "helloworld-deployment"
+  627  minikube ip
+  628  history | tail -n 10
+  629  kubectl get svc "helloworld-deployment"
+  630  kubectl get pods
+  631  kubectl describe svc "helloworld-deployment"
+  632  kubectl scale deployment helloworld-deployment --replicas 5
+  633  kubectl describe svc "helloworld-deployment"
+  634  kubectl scale deployment helloworld-deployment --replicas 1
+  635  kubectl describe svc "helloworld-deployment"
+  636  history | tail -n 10
+  637  history | tail -n 20
+  638  minikube docker-env
+  639  clear
+  640  kubectl set --help
+  641  kubectl get deployments
+  642  kubectl set deploy helloworld-deployment image nginx=httpd
+  643  kubectl set image  deploy helloworld-deployment nginx=httpd
+  644  kubectl get pods
+  645  kubectl set image  deploy helloworld-deployment nginx=adityaprabhakara/app
+  646  minikube service "helloworld-deployment" --url
+  647  kubectl rollout status deploy helloworld-deployment
+  648  kubectl scale deploy helloworld-deployment --replicas 10
+  649  kubectl set image  deploy helloworld-deployment nginx=httpd
+  650  kubectl rollout status deploy helloworld-deployment
+  651  history | tail -n 10
+  652  kubectl rollout undo deploy helloworld-deployment
+  653  kubectl rollout status deploy helloworld-deployment
+  654  history | tail -n 10
+  655  kubectl rollout history deploy helloworld-deployment
+  656  kubectl delete deploy helloworld-deployment
+  657  kubectl get pods
+  658  kubectl create -f dep-helloworld.yml --record 
+  659  kubectl rollout history deploy helloworld-deployment
+  660  kubectl create --help
+  661  kubectl rollout history deploy helloworld-deployment
+  662  kubectl set image deploy helloworld-deployment nginx=httpd
+  663  kubectl rollout history deploy helloworld-deployment
+  664  kubectl rollout undo deploy helloworld-deployment
+  665  kubectl rollout history deploy helloworld-deployment
+  666  kubectl describe deploy "helloworld-deployment"
+  667  kubectl rollout history deploy helloworld-deployment
+  668  kubectl edit deploy helloworld-deployment
+  669  kubectl set image deploy helloworld-deployment nginx=adityaprabhakara/app
+  670  kubectl rollout history deploy helloworld-deployment
+  671  kubectl rollout undo --help | grep rev
+  672  kubectl rollout undo deploy helloworld-deployment --to-revision=2
+  673  kubectl edit deploy helloworld-deployment
+  674  kubectl rollout history deploy helloworld-deployment
+  675  kubectl set image deploy helloworld-deployment nginx=httpd
+  676  kubectl edit deploy helloworld-deployment
+  677  kubectl rollout history deploy helloworld-deployment
+  678  kubectl set image deploy helloworld-deployment nginx=httpd
+  679  kubectl rollout history deploy helloworld-deployment
+  680  cd ..
+  681  vi service/svc-helloworld.yml 
+  682  kubectl create -f service/svc-helloworld.yml 
+  683  kubectl get svc
+  684  kubectl get svc helloworld-service-nodeport
+  685  kubectl delete -f service/svc-helloworld.yml 
+  686  kubectl create -f service/svc-helloworld.yml 
+  687  kubectl create -f service/svc-helloworld.yml 
+  688  kubectl describe svc "helloworld-service-nodeport"
+  689  kubectl delete -f deployment/dep-helloworld.yml 
+  690  kubectl create -f deployment/dep-helloworld.yml 
+  691  curl
+  692* curl 192.168.99.100:3100
+  693  kubectl get svc helloworld-service-nodeport
+  694  kubectl get pods -o wide
+  695  kubectl delete -f deployment/dep-helloworld.yml 
+  696  kubectl create -f deployment/dep-helloworld.yml 
+  697  kubectl describe svc "helloworld-service-nodeport"
+  698  ls
+  699  cd deployment/
+  700  ls
+  701  vi dep-helloworld.yml 
+  702  ls
+  703  kubectl get deployments
+  704  kubectl delete deployment helloworld-deployment helloworld-deployment-beta
+  705  kubectl get svc
+  706  kubectl get svc
+  707  kubectl delete svc blog-db-svc blog-site-svc blog-wp-svc echoheaders-default helloworld-deployment helloworld-service-nodeport helloworld-v1 helloworld-v2 hpa-example
+  708  kubectl get pods
+  709  kubectl get svc
+  710  kubectl get deployments
+  711  kubectl create -f blog-db.yml 
+  712  kubectl create -f blog-db.yml 
+  713  kubectl get pods
+  714  kubectl create -f blog-wp.yml 
+  715  kubectl get pods
+  716  kubectl get pods
+  717  kubectl describe pod blog-wp-67c77bfc5c-7dr7n
+  718  kubectl get pods
+  719  kubectl get svc
+  720  kubectl describe svc blog-wp-svc
+  721  kubectl get pods --show-labels
+  722  kubectl describe pod blog-wp-67c77bfc5c-7dr7n
+  723  kubectl logs blog-wp-67c77bfc5c-7dr7n
+  724  kubectl get svc
+  725  kubectl get svc --namespace kube-system
+  726  kubectl describe svc kube-dns -n kube-system
+  727  kubectl delete -f blog-db.yml 
+  728  kubectl create -f blog-db.yml 
+  729  kubectl create -f blog-db.yml 
+  730  kubectl delete -f blog-wp.yml 
+  731  kubectl delete -f blog-db.yml 
+  732  kubectl create -f blog-db.yml 
+  733  kubectl describe svc "blog-db-svc"
+  734  kubectl create -f blog-wp.yml 
+  735  minikube ip
+  736  kubectl describe svc "blog-db-svc"
+  737  ls
+  738  cd ..
+  739  ls
+  740  cd autoscaling/
+  741  ls
+  742  cd in
+  743  cd ..
+  744  ls
+  745  cd ingress/
+  746  ls
+  747  kubectl create echo-service.yml helloworld-v1.yml helloworld-v2.yml 
+  748  kubectl create -f echo-service.yml -f helloworld-v1.yml -f helloworld-v2.yml 
+  749  kubectl create -f ingress-controller.yml 
+  750  vi newing.yml
+  751  kubectl create -f newingress.yml 
+  752  minikube ip
+  753  kubectl get svc
+  754  kubectl get ing
+  755  kubectl describe helloworld-rules
+  756  kubectl describe ing helloworld-rules
+  757  kubectl svc describe helloworld-v1
+  758  kubectl  describe svc helloworld-v1
+  759  kubectl get ing
+  760  kubectl describe ing test-ingress
+  761  kubectl delete ing test-ingress
+  762  kubectl get ing
+  763  kubectl describe ing helloworld-rules
+  764  kubectl delete -f .
+  765  vi ingress.yml 
+  766  ls
+  767  vi newingress.yml 
+  768  cd ..
+  769  ls
+  770  grep nodeSelector `find .`
+  771  cd ..
+  772  grep nodeSelector `find .`
+  773  vi ./jul30/deployment/dep-helloworld.yml
+  774  vi ./jul30/deployment/dep-helloworld.yml
+  775  clear
+  776  kubectl get svc -n kube-system
+  777  minikube ip
+  778  cd aug13/
+  779  ls
+  780  cd metricserver/
+  781  ls
+  782  cd ..
+  783  ls heapster/
+  784  ls
+  785  cd deployment/
+  786  cd ..
+  787  find secre* .
+  788  cd deployment/
+  789  ls
+  790  cd ..
+  791  back
+  792  cd ..
+  793  ls
+  794  cd aug13/
+  795  ls
+  796  cd backup/
+  797  ls
+  798  vi secrets.yml 
+  799  cd ..
+  800  cd deployment/
+  801  ls
+  802  kubect delete -f secrets.yml 
+  803  kubectl delete -f secrets.yml 
+  804  kubectl create -f secrets.yml 
+  805  kubectl describe secret "blog-secrets"
+  806  kubectl get secret "blog-secrets" -o yaml
+  807  kubectl describe secret "blog-secrets"
+  808  history | tail -n 10
+  809  kubectl delete -f blog-wp.yml 
+  810  kubectl create -f blog-wp.yml 
+  811  kubectl get pods
+  812  kubectl get pods blog-wp-864b497c86-5r5z8
+  813  kubectl describe pods blog-wp-864b497c86-5r5z8
+  814  kubectl get pods blog-wp-864b497c86-5r5z8
+  815  kubectl get nodes
+  816  kubectl delete -f blog-wp.yml 
+  817  kubectl create -f blog-wp.yml 
+  818  cd ..
+  819  ls
+  820  cd kube-on-aws
+  821  ls
+  822  ls
+  823  vi kube-master.sh 
+  824  kubectl get namespaces
+  825  kubectl delete ns myspace
+  826  kubectl get ns
+  827  cd ../
+  828  cd resource-quota/
+  829  kubectl create -f .
+  830  kubectl delete -f .
+  831  kubectl create -f resourcequota.yml 
+  832  kubectl get pods -n myspace
+  833  kubectl create -f helloworld-no-quotas.yml 
+  834  kubectl get deployment -n myspace
+  835  vi helloworld-no-quotas.yml 
+  836  kubectl describe deployment helloworld-deployment
+  837  kubectl describe deployment helloworld-deployment -n myspace
+  838  kubectl get rs -n myspace
+  839  kubectl describe rs helloworld-deployment-558bfc7f45
+  840  kubectl get rs -n myspace
+  841  kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+  842  kubectl delete -f helloworld-no-quotas.yml 
+  843  kubectl create -f defaults.yml 
+  844  kubectl create -f helloworld-no-quotas.yml 
+  845  kubectl get pods -n myspace
+  846  kubectl get rs -n myspace
+  847  kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+  848  kubectl scale deployment helloworld-deployment --replicas 6
+  849  kubectl scale deployment helloworld-deployment --replicas 6 -n myspace
+  850  kubectl get pods -n myspace
+  851  kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+  852  kubectl get pods -n myspace
+  853  history | tain -n 20
+  854  history | tail -n 20
+  855  history > aug17.history.txt

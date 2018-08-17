@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+  namespace: myspace
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: k8s-demo
+        image: nginx:alpine
+        ports:
+        - name: nginxport
+          containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 0.25Gi
+          limits:
+            cpu: 200m
+            memory: 0.25Gi

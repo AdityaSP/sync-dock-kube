@@ -1,0 +1,4197 @@
+Dell lap@Dell /d/docker-workshop/k8s-playground-master/xenial
+λ cd ../..
+Dell lap@Dell /d/docker-workshop
+λ ls
+admin_user.yml      index.html              minikube.exe*
+alpine-Dockerfile   jul23-27/               newrole.yml
+aug6/               jul30/                  nexus/
+cmder.zip           jun7/                   nginx/
+docker-compose.yml  k8s-playground-master/  nginx.conf
+Dockerfile          kubectl.exe*            pod-reader.yml
+Dockerfile.txt      kube-workshop/          role-binding-pod-reader.yml
+DockerToolbox.exe*  may7/                   ubuntu-Dockerfile
+Dell lap@Dell /d/docker-workshop
+λ clera
+bash: clera: command not found
+Dell lap@Dell /d/docker-workshop
+λ clear
+
+Dell lap@Dell /d/docker-workshop
+λ mkiddir aug13
+Dell lap@Dell /d/docker-workshop
+λ cd aug13
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube ip
+There is a newer version of minikube available (v0.28.2).  Download it here:
+https://github.com/kubernetes/minikube/releases/tag/v0.28.2
+
+To disable this notification, run the following:
+minikube config set WantUpdateNotification false
+192.168.99.101
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube kubectl get pods
+NAME                                        READY     STATUS             RESTARTS   AGE
+blog-db-54565c8fc8-2ddtq                    1/1       Running            2          3d
+blog-site-7f57d97cd5-v7d4p                  2/2       Running            7          4d
+blog-wp-56747cc969-skjh6                    1/1       Running            44         3d
+config-map-test                             0/1       CrashLoopBackOff   52         2d
+echoheaders-6f7cj                           1/1       Running            0          2d
+helloworld-v1-deployment-d788d98b5-jgrsw    1/1       Running            0          2d
+helloworld-v2-deployment-565f848b9f-pbwns   1/1       Running            0          2d
+hpa-example-797dfdbc87-nshlb                1/1       Running            2          3d
+mysql-7768cd7f88-2tfrp                      1/1       Running            1          2d
+nginx-ingress-controller-m4j65              0/1       CrashLoopBackOff   64         2d
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl getd deployments
+NAME                       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+blog-db                    1         1         1            1           3d
+blog-site                  1         1         1            1           4d
+blog-wp                    1         1         1            1           3d
+helloworld-v1-deployment   1         1         1            1           2d
+helloworld-v2-deployment   1         1         1            1           2d
+hpa-example                1         1         1            1           3d
+mysql                      1         1         1            1           2d
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl detel dlete deployments $(kubectl get deployments -f head| cut -f 1 -d " " 
+NAME
+blog-db
+blog-site
+blog-wp
+helloworld-v1-deployment
+helloworld-v2-deployment
+hpa-example
+mysql
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get deployments | cut -f 1 -d " " kubectl delteete -fdeployment $()
+deployment "blog-db" deleted
+deployment "blog-site" deleted
+deployment "blog-wp" deleted
+deployment "helloworld-v1-deployment" deleted
+deployment "helloworld-v2-deployment" deleted
+deployment "hpa-example" deleted
+deployment "mysql" deleted
+Error from server (NotFound): deployments.extensions "NAME" not found
+Dell lap@Dell /d/docker-workshop/aug13
+λ docker -kubectl docker-machine env
+minikube
+Error: unknown command "docker-machine" for "minikube"
+Run 'minikube --help' for usage.
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube docker-machine envenv
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.101:2376"
+export DOCKER_CERT_PATH="C:\Users\Dell lap\.minikube\certs"
+export DOCKER_API_VERSION="1.23"
+# Run this command to configure your shell:
+# eval $(minikube docker-env)
+Dell lap@Dell /d/docker-workshop/aug13
+λ eval $(minikube docker-env)
+Dell lap@Dell /d/docker-workshop/aug13
+λ docker containerversion
+Client:
+ Version:	18.01.0-ce
+ API version:	1.23
+ Go version:	go1.9.2
+ Git commit:	03596f51b1
+ Built:	Thu Jan 11 22:29:41 2018
+ OS/Arch:	windows/amd64
+ Experimental:	false
+ Orchestrator:	swarm
+
+Server:
+ Engine:
+  Version:	17.09.0-ce
+  API version:	1.32 (minimum version 1.12)
+  Go version:	go1.8.3
+  Git commit:	afdb6d4
+  Built:	Tue Sep 26 22:45:38 2017
+  OS/Arch:	linux/amd64
+  Experimental:	false
+Dell lap@Dell /d/docker-workshop/aug13
+λ which docker
+/c/Program Files/Docker Toolbox/docker
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ clear
+
+Dell lap@Dell /d/docker-workshop/aug13
+λ clear
+
+Dell lap@Dell /d/docker-workshop/aug13
+λ docker info
+Containers: 35
+ Running: 27
+ Paused: 0
+ Stopped: 8
+Images: 48
+Server Version: 17.09.0-ce
+Storage Driver: overlay2
+ Backing Filesystem: extfs
+ Supports d_type: true
+ Native Overlay Diff: true
+Logging Driver: json-file
+Cgroup Driver: cgroupfs
+Plugins:
+ Volume: local
+ Network: bridge host macvlan null overlay
+ Log: awslogs fluentd gcplogs gelf journald json-file logentries splunk syslog
+Swarm: inactive
+Runtimes: runc
+Default Runtime: runc
+Init Binary: docker-init
+containerd version: 06b9cb35161009dcb7123345749fef02f7cea8e0
+runc version: 3f2f8b84a77f73d38244dd690525642a72156c64
+init version: N/A (expected: )
+Security Options:
+ seccomp
+Kernel Version: 4.9.64
+Operating System: Buildroot 2017.11
+OSType: linux
+Architecture: x86_64
+CPUs: 2
+Total Memory: 1.953GiB
+Name: minikube
+ID: HOM2:C5D4:CDQT:OLKV:LHG6:DZWW:2UEJ:E7F4:UBD3:7THW:HPIW:3JEZ
+Docker Root Dir: /var/lib/docker
+Debug Mode (client): false
+Debug Mode (server): false
+Username: adityaprabhakara
+Registry: https://index.docker.io/v1/
+Labels:
+ provider=virtualbox
+Experimental: false
+Insecure Registries:
+ 10.96.0.0/12
+ 127.0.0.0/8
+Live Restore Enabled: false
+
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube statrtrtversion
+minikube version: v0.25.0
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl version
+Client Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.0", GitCommit:"925c127ec6b946659ad0fd596fa959be43f0cc05", GitTreeState:"clean", BuildDate:"2017-12-15T21:07:38Z", GoVersion:"go1.9.2", Compiler:"gc", Platform:"windows/amd64"}
+Server Version: version.Info{Major:"", Minor:"", GitVersion:"v1.9.0", GitCommit:"925c127ec6b946659ad0fd596fa959be43f0cc05", GitTreeState:"clean", BuildDate:"2018-01-26T19:04:38Z", GoVersion:"go1.9.1", Compiler:"gc", Platform:"linux/amd64"}
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube startminikube  version
+minikube version: v0.25.0
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube ip
+192.168.99.101
+Dell lap@Dell /d/docker-workshop/aug13
+λ dominikube docker-env
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.101:2376"
+export DOCKER_CERT_PATH="C:\Users\Dell lap\.minikube\certs"
+export DOCKER_API_VERSION="1.23"
+# Run this command to configure your shell:
+# eval $(minikube docker-env)
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube ip
+192.168.99.101
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ minikube status
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube stop
+Stopping local Kubernetes cluster...
+Machine stopped.
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube stopart
+Starting local Kubernetes v1.9.0 cluster...
+Starting VM...
+Getting VM IP address...
+Moving files into cluster...
+Setting up certs...
+Connecting to cluster...
+Setting up kubeconfig...
+Starting cluster components...
+Kubectl is now configured to use the cluster.
+Loading cached images from config file.
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ docker image ls
+REPOSITORY                                                       TAG                 IMAGE ID            CREATED             SIZE
+adityaprabhakara/alpine_apache2                                  latest              e60d8c93d385        6 days ago          8.94MB
+wordpress                                                        php7.0              eb1d719a0b7a        9 days ago          398MB
+mysql                                                            5.6                 7edb93321b06        12 days ago         256MB
+mysql                                                            5.7                 75576f90a779        12 days ago         372MB
+httpd                                                            latest              11426a19f1a2        12 days ago         178MB
+mysql                                                            <none>              6bb891430fb6        2 weeks ago         372MB
+nginx                                                            latest              c82521676580        2 weeks ago         109MB
+127.0.0.1:5000/code                                              latest              902b648968ac        2 weeks ago         8.59MB
+adityaprabhakara/code                                            latest              902b648968ac        2 weeks ago         8.59MB
+wordpress                                                        <none>              43c459670432        3 weeks ago         398MB
+quay.io/kubernetes-ingress-controller/nginx-ingress-controller   0.17.1              8410cbcd825d        3 weeks ago         360MB
+mysql                                                            <none>              c356247174ed        3 weeks ago         372MB
+registry                                                         latest              b2b03e9146e1        5 weeks ago         33.3MB
+alpine                                                           3.4                 993b1b41569d        5 weeks ago         4.82MB
+127.0.0.1:5000/alpine                                            myown               11cd0b38bc3c        5 weeks ago         4.41MB
+alpine                                                           latest              11cd0b38bc3c        5 weeks ago         4.41MB
+nginx                                                            <none>              649dcb69b782        5 weeks ago         109MB
+busybox                                                          latest              8c811b4aec35        2 months ago        1.15MB
+wordpress                                                        4-php7.0            641007f98748        3 months ago        416MB
+<none>                                                           <none>              0d16d0a97dd1        3 months ago        372MB
+k8s.gcr.io/heapster-amd64                                        v1.5.3              f57c75cd7b0a        3 months ago        75.3MB
+nginx                                                            <none>              ae513a47849c        3 months ago        109MB
+httpd                                                            <none>              fb2f3851a971        3 months ago        178MB
+anapsix/alpine-java                                              latest              430fab324907        3 months ago        127MB
+busybox                                                          <none>              8ac48589692a        4 months ago        1.15MB
+httpd                                                            <none>              2e202f453940        6 months ago        179MB
+prom/prometheus                                                  v2.1.0              c8ecf7c719c1        6 months ago        112MB
+127.0.0.1:5001/mynginx                                           latest              bb00c21b4edf        7 months ago        16.8MB
+127.0.0.1:5002/mynginx                                           latest              bb00c21b4edf        7 months ago        16.8MB
+nginx                                                            alpine              bb00c21b4edf        7 months ago        16.8MB
+nginx                                                            <none>              3f8a4339aadd        7 months ago        108MB
+gcr.io/google_containers/metrics-server-amd64                    v0.2.1              9801395070f3        7 months ago        42.5MB
+k8s.gcr.io/kubernetes-dashboard-amd64                            v1.8.1              e94d2f21bc0c        8 months ago        121MB
+gcr.io/google-containers/kube-addon-manager                      v6.5                d166ffa9201a        9 months ago        79.5MB
+gcr.io/k8s-minikube/storage-provisioner                          v1.8.1              4689081edb10        9 months ago        80.8MB
+liatrio/alpine-jenkins                                           latest              c99f4fdf890a        9 months ago        435MB
+maven                                                            3.5.0               080cf1fccf1c        10 months ago       750MB
+k8s.gcr.io/k8s-dns-sidecar-amd64                                 1.14.5              fed89e8b4248        10 months ago       41.8MB
+k8s.gcr.io/k8s-dns-kube-dns-amd64                                1.14.5              512cd7425a73        10 months ago       49.4MB
+k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64                           1.14.5              459944ce8cc4        10 months ago       41.4MB
+k8s.gcr.io/heapster-influxdb-amd64                               v1.3.3              577260d221db        11 months ago       12.5MB
+k8s.gcr.io/heapster-grafana-amd64                                v4.4.3              8cb3de219af7        11 months ago       152MB
+kubernetes/heapster                                              canary              0a56f7040da5        19 months ago       971MB
+frapsoft/openssl                                                 latest              a23b40e34b2f        20 months ago       5.35MB
+wardviaene/k8s-demo                                              latest              39308dccafb4        20 months ago       651MB
+wardviaene/k8s-demo                                              2                   a589ef0d2b4e        21 months ago       651MB
+gcr.io/google_containers/heapster_grafana                        v3.1.1              41b92a01197f        22 months ago       279MB
+gcr.io/google_containers/nginx-ingress-controller                0.8.3               3f8119a98476        24 months ago       147MB
+gcr.io/google_containers/pause-amd64                             3.0                 99e59f495ffa        2 years ago         747kB
+kubernetes/heapster_influxdb                                     v0.6                a40222acdde6        2 years ago         271MB
+gcr.io/google_containers/echoserver                              1.0                 a3724de5980c        2 years ago         689MB
+gcr.io/google_containers/hpa-example                             latest              4ca4c13a6d7c        2 years ago         481MB
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ minikub se stop
+There is a newer version of minikube available (v0.28.2).  Download it here:
+https://github.com/kubernetes/minikube/releases/tag/v0.28.2
+
+To disable this notification, run the following:
+minikube config set WantUpdateNotification false
+Stopping local Kubernetes cluster...
+Machine stopped.
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube start
+Starting local Kubernetes v1.9.0 cluster...
+Starting VM...
+Getting VM IP address...
+Moving files into cluster...
+Setting up certs...
+Connecting to cluster...
+Setting up kubeconfig...
+Starting cluster components...
+Kubectl is now configured to use the cluster.
+Loading cached images from config file.
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube ip
+192.168.99.101
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube stop
+Stopping local Kubernetes cluster...
+Error stopping machine:  Error stopping host: minikube: Maximum number of retries (60) exceeded
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube stopminikube startminikube start
+Starting local Kubernetes v1.9.0 cluster...
+Starting VM...
+Getting VM IP address...
+Moving files into cluster...
+Setting up certs...
+Connecting to cluster...
+Setting up kubeconfig...
+Starting cluster components...
+Kubectl is now configured to use the cluster.
+Loading cached images from config file.
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube dominikube docker-env
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="C:\Users\Dell lap\.minikube\certs"
+export DOCKER_API_VERSION="1.23"
+# Run this command to configure your shell:
+# eval $(minikube docker-env)
+Dell lap@Dell /d/docker-workshop/aug13
+λ eval $(minikube docker-env)
+Dell lap@Dell /d/docker-workshop/aug13
+λ dockerdocker env  network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+a31581f55eda        bridge              bridge              local
+0307372dfe1d        host                host                local
+1d9e2157d35a        intranet            bridge              local
+f01661d89a69        none                null                local
+Dell lap@Dell /d/docker-workshop/aug13
+λ docker network inspect 1d9e2157d35a
+[
+    {
+        "Name": "intranet",
+        "Id": "1d9e2157d35a61d36e119ff0a96165f811a16c4ed2bd23f76aa038f34744707f",
+        "Created": "2018-08-08T16:17:38.782568598Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+λ inikuminikube ip
+192.168.99.100
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ cp ../aug6/-../aug6/
+r../aug6/ ../aug6/ .
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+aug6/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd mv aug6/* .
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  deployment/       kube-on-aws/   pv-pvc/          service/
+aug6/            heapster/         metricserver/  rc/              stack/
+autoscaling/     history_day1.txt  monitoring/    resource-quota/  svc-helloworld.yml
+code/            history_day3.txt  pinger/        screendump.txt   user/
+configmap/       ingress/          pod/           sec.json
+Dell lap@Dell /d/docker-workshop/aug13
+λ rm -rf history_day*
+Dell lap@Dell /d/docker-workshop/aug13
+λ rm -rf screendump.txt 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  deployment/    monitoring/  resource-quota/     user/
+aug6/            heapster/      pinger/      sec.json
+autoscaling/     ingress/       pod/         service/
+code/            kube-on-aws/   pv-pvc/      stack/
+configmap/       metricserver/  rc/          svc-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl version
+Client Version: version.Info{Major:"1", Minor:"9", GitVersion:"v1.9.0", GitCommit:"925c127ec6b946659ad0fd596fa959be43f0cc05", GitTreeState:"clean", BuildDate:"2017-12-15T21:07:38Z", GoVersion:"go1.9.2", Compiler:"gc", Platform:"windows/amd64"}
+Server Version: version.Info{Major:"", Minor:"", GitVersion:"v1.9.0", GitCommit:"925c127ec6b946659ad0fd596fa959be43f0cc05", GitTreeState:"clean", BuildDate:"2018-01-26T19:04:38Z", GoVersion:"go1.9.1", Compiler:"gc", Platform:"linux/amd64"}
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get pods
+NAME                             READY     STATUS             RESTARTS   AGE
+config-map-test                  0/1       CrashLoopBackOff   23         6d
+echoheaders-6f7cj                1/1       Running            3          5d
+nginx-ingress-controller-m4j65   1/1       Running            70         5d
+Dell lap@Dell /d/docker-workshop/aug13
+λ dockerkubectl delete rc echoheaders
+replicationcontroller "echoheaders" deleted
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete rc echoheadersingresrc nginx-ingress-controller
+Error from server (NotFound): replicationcontrollers "nginx-ingress-controller" not found
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete rc nginx-ingress-controllerget rs
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get rsc
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get pods
+NAME                             READY     STATUS             RESTARTS   AGE
+config-map-test                  0/1       CrashLoopBackOff   23         6d
+echoheaders-6f7cj                1/1       Terminating        3          5d
+nginx-ingress-controller-m4j65   1/1       Running            70         5d
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete pod config-map-test
+pod "config-map-test" deleted
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl describe pod nginx-ingress-controller-m4j65
+Name:           nginx-ingress-controller-m4j65
+Namespace:      default
+Node:           minikube/192.168.99.100
+Start Time:     Fri, 10 Aug 2018 15:01:09 +0530
+Labels:         app=ingress-nginx
+                controller-revision-hash=2687590641
+                pod-template-generation=1
+Annotations:    <none>
+Status:         Running
+IP:             172.17.0.6
+Controlled By:  DaemonSet/nginx-ingress-controller
+Containers:
+  nginx-ingress-controller:
+    Container ID:  docker://04cff6fc14ad41e0adfb87799b6f74ade29b18c475c689d3ea3d72c7a84547bd
+    Image:         quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.17.1
+    Image ID:      docker-pullable://quay.io/kubernetes-ingress-controller/nginx-ingress-controller@sha256:e8fd785651c2f3ebb59cd8ea1d6a9b528ecec203035525e880e793c99c6e22a0
+    Ports:         80/TCP, 443/TCP
+    Args:
+      /nginx-ingress-controller
+      --default-backend-service=$(POD_NAMESPACE)/echoheaders-default
+      --configmap=$(POD_NAMESPACE)/nginx-configuration
+      --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+      --udp-services-configmap=$(POD_NAMESPACE)/udp-services
+      --publish-service=$(POD_NAMESPACE)/ingress-nginx
+      --annotations-prefix=nginx.ingress.kubernetes.io
+    State:          Running
+      Started:      Thu, 16 Aug 2018 09:48:01 +0530
+    Ready:          True
+    Restart Count:  70
+    Liveness:       http-get http://:10254/healthz delay=10s timeout=1s period=10s #success=1 #failure=3
+    Readiness:      http-get http://:10254/healthz delay=0s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      POD_NAME:       nginx-ingress-controller-m4j65 (v1:metadata.name)
+      POD_NAMESPACE:  default (v1:metadata.namespace)
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from nginx-ingress-serviceaccount-token-fnmv9 (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  nginx-ingress-serviceaccount-token-fnmv9:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  nginx-ingress-serviceaccount-token-fnmv9
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/disk-pressure:NoSchedule
+                 node.kubernetes.io/memory-pressure:NoSchedule
+                 node.kubernetes.io/not-ready:NoExecute
+                 node.kubernetes.io/unreachable:NoExecute
+Events:          <none>
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delte ete DaemonSet/nginx-ingress-controller
+daemonset "nginx-ingress-controller" deleted
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete DaemonSet/nginx-ingress-controller
+scribe pod nginx-ingress-controller-m4j65
+lete pod config-map-test
+get pods
+NAME              READY     STATUS        RESTARTS   AGE
+config-map-test   0/1       Terminating   23         6d
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get podsdelete DaemonSet/nginx-ingress-controller
+scribe pod nginx-ingress-controller-m4j65
+lete DaemonSet/nginx-ingress-controller
+get pods
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ cd ocd ls pod/pod-helloworld.yml 
+pod/pod-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f pod/pod-helloworld.yml 
+pod "my-nginx" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f pod/pod-helloworld.yml 
+ls
+kubectl get pods
+NAME       READY     STATUS    RESTARTS   AGE
+my-nginx   1/1       Running   0          1m
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl describe pod my-nginx
+Name:         my-nginx
+Namespace:    default
+Node:         minikube/192.168.99.100
+Start Time:   Thu, 16 Aug 2018 12:47:10 +0530
+Labels:       app=helloworld
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.3
+Containers:
+  nginx:
+    Container ID:   docker://f5d19463507b2b5cda2b9cacc3f0335fb97b4f916f6adb5a71fa1d5023d399ed
+    Image:          nginx:alpine
+    Image ID:       docker-pullable://127.0.0.1:5001/mynginx@sha256:a4ac36c250ec97bb6108e04e3cdd2848e338ee197737cebd39c960d7e3237775
+    Port:           80/TCP
+    State:          Running
+      Started:      Thu, 16 Aug 2018 12:47:11 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-ldpc4 (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  default-token-ldpc4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-ldpc4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     <none>
+Events:
+  Type    Reason                 Age   From               Message
+  ----    ------                 ----  ----               -------
+  Normal  Scheduled              9m    default-scheduler  Successfully assigned my-nginx to minikube
+  Normal  SuccessfulMountVolume  9m    kubelet, minikube  MountVolume.SetUp succeeded for volume "default-token-ldpc4"
+  Normal  Pulled                 9m    kubelet, minikube  Container image "nginx:alpine" already present on machine
+  Normal  Created                9m    kubelet, minikube  Created container
+  Normal  Started                9m    kubelet, minikube  Started container
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd pod/
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ ls
+pod-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ cd cat pod-helloworld.yml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-nginx
+  labels:
+    app: helloworld
+spec:
+  containers:
+  - name: nginx
+    image: nginx:alpine
+    ports:
+    - name: nginxport
+      containerPort: 80Dell lap@Dell /d/docker-workshop/aug13/pod
+λ cat pod-helloworld.yml 
+lscd pod/
+kubectl describe pod my-nginx
+get podsdescribe pod my-nginx
+get pods
+NAME       READY     STATUS    RESTARTS   AGE
+my-nginx   1/1       Running   0          15m
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ kubectl get pods
+cat pod-helloworld.yml 
+lscd pod/
+kubectl describe pod my-nginx
+Name:         my-nginx
+Namespace:    default
+Node:         minikube/192.168.99.100
+Start Time:   Thu, 16 Aug 2018 12:47:10 +0530
+Labels:       app=helloworld
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.3
+Containers:
+  nginx:
+    Container ID:   docker://e7d8c7a1d8fe82abd2eecd3382ceae0b58303f9034634c1fd41c26bb0116e820
+    Image:          nginx:alpine
+    Image ID:       docker-pullable://127.0.0.1:5001/mynginx@sha256:a4ac36c250ec97bb6108e04e3cdd2848e338ee197737cebd39c960d7e3237775
+    Port:           80/TCP
+    State:          Running
+      Started:      Thu, 16 Aug 2018 13:02:04 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-ldpc4 (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  default-token-ldpc4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-ldpc4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     <none>
+Events:
+  Type    Reason                 Age               From               Message
+  ----    ------                 ----              ----               -------
+  Normal  Scheduled              15m               default-scheduler  Successfully assigned my-nginx to minikube
+  Normal  SuccessfulMountVolume  15m               kubelet, minikube  MountVolume.SetUp succeeded for volume "default-token-ldpc4"
+  Normal  Pulled                 1m (x2 over 15m)  kubelet, minikube  Container image "nginx:alpine" already present on machine
+  Normal  Created                1m (x2 over 15m)  kubelet, minikube  Created container
+  Normal  Started                1m (x2 over 15m)  kubelet, minikube  Started container
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ kubectl describe pod my-nginx
+get pods
+cat pod-helloworld.yml 
+kubectl get pods
+NAME       READY     STATUS    RESTARTS   AGE
+my-nginx   1/1       Running   0          17m
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ kubectl get pods
+NAME       READY     STATUS    RESTARTS   AGE
+my-nginx   1/1       Running   1          18m
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ 
+λ docker kubectl get pods
+NAME       READY     STATUS    RESTARTS   AGE
+my-nginx   1/1       Running   1          1h
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ kubectl delete pod my-nginx
+pod "my-nginx" deleted
+Dell lap@Dell /d/docker-workshop/aug13/pod
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  deployment/    monitoring/  resource-quota/     user/
+aug6/            heapster/      pinger/      sec.json
+autoscaling/     ingress/       pod/         service/
+code/            kube-on-aws/   pv-pvc/      stack/
+configmap/       metricserver/  rc/          svc-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd rc
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ ls
+rc-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get pods
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl create -f krc/hrhhrc-helloworld.yml 
+λ kubectl create -f rc-helloworld.yml replicationcontroller "helloworld-controller" created
+
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get rereplicationcontroller
+NAME                    DESIRED   CURRENT   READY     AGE
+helloworld-controller   2         2         2         1m
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get replicationcontrollerc\
+NAME                    DESIRED   CURRENT   READY     AGE
+helloworld-controller   2         2         2         1m
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get pods
+NAME                          READY     STATUS    RESTARTS   AGE
+helloworld-controller-4qb6v   1/1       Running   0          2m
+helloworld-controller-lwbps   1/1       Running   0          2m
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl delete pod helloworld-controller-4qb6v
+pod "helloworld-controller-4qb6v" deleted
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl delete pod helloworld-controller-4qb6v
+get pods
+NAME                          READY     STATUS        RESTARTS   AGE
+helloworld-controller-4qb6v   0/1       Terminating   0          5m
+helloworld-controller-bwb58   1/1       Running       0          10s
+helloworld-controller-lwbps   1/1       Running       0          5m
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get pods
+NAME                          READY     STATUS    RESTARTS   AGE
+helloworld-controller-bwb58   1/1       Running   0          32s
+helloworld-controller-lwbps   1/1       Running   0          6m
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get pods --show-labels
+NAME                          READY     STATUS    RESTARTS   AGE       LABELS
+helloworld-controller-bwb58   1/1       Running   0          2m        app=helloworld
+helloworld-controller-lwbps   1/1       Running   0          7m        app=helloworld
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get rc
+NAME                    DESIRED   CURRENT   READY     AGE
+helloworld-controller   2         2         2         9m
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl delete rc helloworld-controller
+replicationcontroller "helloworld-controller" deleted
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl get pods
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13/rc
+λ kubectl createcd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create opd-f pod/hpod-helloworld.yml 
+pod "my-nginx" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f pod/pod-helloworld.yml 
+cd ..
+kubectl get podsdelete rc helloworld-controller
+get rcpods --show-labels --show-labels
+NAME       READY     STATUS    RESTARTS   AGE       LABELS
+my-nginx   1/1       Running   0          17s       app=helloworld
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get pods --show-labels
+create -f pod/pod-helloworld.yml 
+cd ..
+kubectl get pods
+cd ..
+kubectl create -f pod/pod-helloworld.yml rc/rc-helloworld.yml 
+replicationcontroller "helloworld-controller" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f rc/rc-helloworld.yml 
+get pods --show-labels
+NAME                          READY     STATUS    RESTARTS   AGE       LABELS
+helloworld-controller-bc8st   1/1       Running   0          11s       app=helloworld
+my-nginx                      1/1       Running   0          1m        app=helloworld
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl dlelete pod my-nginx
+pod "my-nginx" deleted
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete pod my-nginx
+get pods --show-labels
+NAME                          READY     STATUS        RESTARTS   AGE       LABELS
+helloworld-controller-bc8st   1/1       Running       0          3m        app=helloworld
+helloworld-controller-vnfsj   1/1       Running       0          10s       app=helloworld
+my-nginx                      0/1       Terminating   0          4m        app=helloworld
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl scale rc hehelloworld-controller --replicas 5105
+replicationcontroller "helloworld-controller" scaled
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl scale rc helloworld-controller --replicas 5
+get pods --show-labels
+NAME                          READY     STATUS    RESTARTS   AGE       LABELS
+helloworld-controller-bc8st   1/1       Running   0          8m        app=helloworld
+helloworld-controller-h5b67   1/1       Running   0          11s       app=helloworld
+helloworld-controller-q88cw   1/1       Running   0          11s       app=helloworld
+helloworld-controller-qvb4g   1/1       Running   0          11s       app=helloworld
+helloworld-controller-vnfsj   1/1       Running   0          5m        app=helloworld
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl describeget prc helloworld-controller -o yaml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  creationTimestamp: 2018-08-16T09:04:22Z
+  generation: 2
+  labels:
+    app: helloworld
+  name: helloworld-controller
+  namespace: default
+  resourceVersion: "428065"
+  selfLink: /api/v1/namespaces/default/replicationcontrollers/helloworld-controller
+  uid: 5dce9c71-a133-11e8-b51c-08002789a48f
+spec:
+  replicas: 5
+  selector:
+    app: helloworld
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - image: nginx:alpine
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        ports:
+        - containerPort: 80
+          name: nginxport
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 5
+  fullyLabeledReplicas: 5
+  observedGeneration: 2
+  readyReplicas: 5
+  replicas: 5
+Dell lap@Dell /d/docker-workshop/aug13
+λ history | grtain -n 10l
+  586  kubectl create -f pod/pod-helloworld.yml 
+  587  kubectl get pods --show-labels
+  588  kubectl create -f rc/rc-helloworld.yml 
+  589  kubectl get pods --show-labels
+  590  kubectl delete pod my-nginx
+  591  kubectl get pods --show-labels
+  592  kubectl scale rc helloworld-controller --replicas 5
+  593  kubectl get pods --show-labels
+  594  kubectl get rc helloworld-controller -o yaml
+  595  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13
+λ history | tail -n 10
+kubectl get rc helloworld-controller -o yaml
+pods --show-labels
+scale rc helloworld-controller --replicas 5
+get pods --show-labels
+scale rc helloworld-controller --replicas 50
+replicationcontroller "helloworld-controller" scaled
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl scale rc helloworld-controller --replicas 03
+replicationcontroller "helloworld-controller" scaled
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl edit rc hellow-orld-controller
+replicationcontroller "helloworld-controller" edited
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl edit rc helloworld-controller
+kubectl edit rc helloworld-controller
+scale rc helloworld-controller --replicas 30
+history | tail -n 10
+kubectl get rc helloworld-controller -o yaml
+pods --show-labels
+scale rc helloworld-controller --replicas 5
+get pods --show-labels -o wide
+NAME                          READY     STATUS    RESTARTS   AGE       IP            NODE       LABELS
+helloworld-controller-h9p4t   1/1       Running   0          1m        172.17.0.12   minikube   app=helloworld
+helloworld-controller-jq8gt   1/1       Running   0          3m        172.17.0.10   minikube   app=helloworld
+helloworld-controller-jrlfn   1/1       Running   0          3m        172.17.0.6    minikube   app=helloworld
+helloworld-controller-kmwv7   1/1       Running   0          1m        172.17.0.13   minikube   app=helloworld
+helloworld-controller-phwcz   1/1       Running   0          3m        172.17.0.3    minikube   app=helloworld
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd deployment/
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ ls
+blog-db.yml      blog-site.yml      blog-site-with-secrets.yml  old/
+blog-db-svc.yml  blog-site-svc.yml  blog-wp.yml                 secrets.yml
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ mv * old/. old/y old/m old/l old/
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ cp old/hdep-helloworld.yml .
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ vi dep-helloworld.yml 
+
+"dep-helloworld.yml" [noeol][dos] 31L, 568C
+▽
+  
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:labels:app: helloworld
+    spec:containers:- name: nginx
+<ocker-workshop/aug13/deployment/dep-helloworld.yml [dos] (14:57 16/08/2018)1,1 Top
+~@k
+   
+2
+~@k
+   
+3
+~@k
+   
+4
+~@k
+   
+5
+~@k
+   
+6
+~@k
+   
+7
+~@k
+   
+8
+~@k
+   
+image: nginx:alpine
+9,1  5%
+~@k
+   
+ports:cker-workshop/aug13/deployment/dep-helloworld.yml [dos] (14:57 16/08/2018)10,1 11
+~@k
+   
+- name: nginxport1,1 16
+~@k
+   
+containerPort: 802,1 22
+~@k
+   
+---3,1 27
+~@k
+   
+apiVersion: v14,1 33
+~@k
+   
+kind: Service5,1 38
+~@k
+   
+metadata:6,1 44
+~@k
+   
+name: helloworld-service-nodeport7,1 50
+~@k
+   
+spec:8,1 55
+d
+d
+  
+ports:r-workshop/aug13/deployment/dep-helloworld.yml[+]8
+d
+d
+  
+- port: 888862
+d
+d
+  
+nodePort: 310016
+d
+d
+  
+targetPort: nginxport3 71dd  
+protocol: TCP1 76
+d
+d
+  
+selector:3 83dd  
+app: helloworld90dd  
+type: NodePort5 Botdd  
+~                                                                                  dd  
+~                                                                                  dd  
+~                                                                                  3dd  
+~                                                                                  5dd  
+~                                                                                  3dd  
+~                                                                                  -workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)17,11~@k   6~@k   
+app: helloworld5~@k   
+labels:4~@k   
+metadata:3~@k   
+template:2~@k   
+replicas: 1r-workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)11,9~@k   
+spec:-workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)10,11~@k   
+name: helloworld-deploymentr-workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)9,11 75%~@k   
+metadata:8,11 50~@k   
+kind: Deployment7,11 25~@k   
+apiVersion: extensions/v1beta16,11 Top~@k   er-workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)5,5~@k   r-workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)4,11~@k   er-workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)3,9~@k   r-workshop/aug13/deployment/dep-helloworld.yml[+] [dos] (14:57 16/08/2018)2,11~@k   1~@k   ^[  ^[  :
+:wq
+"dep-helloworld.yml" [dos] 17L, 334C written
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ cat dep-helloworld.yml 
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - name: nginxport
+          containerPort: 80
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ mv old ../backup
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ ls
+dep-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+(reverse-i-search)`':d': mv old ../backup
+failed reverse-i-search)`dleete
+reverse-i-search)`d': cat dep-helloworld.yml el': kubectl delete pod my-nginxeterc helloworld-controller
+λ
+replicationcontroller "helloworld-controller" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods
+NAME                          READY     STATUS        RESTARTS   AGE
+helloworld-controller-jrlfn   0/1       Terminating   0          11m
+helloworld-controller-kmwv7   0/1       Terminating   0          10m
+helloworld-controller-phwcz   0/1       Terminating   0          11m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ dokubectl create -f dep-helloworld.yml 
+deployment "helloworld-deployment" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods
+NAME                                    READY     STATUS    RESTARTS   AGE
+helloworld-deployment-bf5b9bc9d-86bnk   1/1       Running   0          1m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get deploy ment "helloworld-deployment"
+NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+helloworld-deployment   1         1         1            1           1m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe deploy hellowdeployment"helloworld-deployment"
+Name:                   helloworld-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 16 Aug 2018 15:00:13 +0530
+Labels:                 app=helloworld
+Annotations:            deployment.kubernetes.io/revision=1
+Selector:               app=helloworld
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  app=helloworld
+  Containers:
+   nginx:
+    Image:        nginx:alpine
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   helloworld-deployment-bf5b9bc9d (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  2m    deployment-controller  Scaled up replica set helloworld-deployment-bf5b9bc9d to 1
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get rs helloworld-deployment-bf5b9bc9d
+NAME                              DESIRED   CURRENT   READY     AGE
+helloworld-deployment-bf5b9bc9d   1         1         1         3m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe helloworld-deployment-bf5b9bc9drhelloworld-deployment-bf5b9bc9d
+shelloworld-deployment-bf5b9bc9d
+ helloworld-deployment-bf5b9bc9d
+Name:           helloworld-deployment-bf5b9bc9d
+Namespace:      default
+Selector:       app=helloworld,pod-template-hash=691656758
+Labels:         app=helloworld
+                pod-template-hash=691656758
+Annotations:    deployment.kubernetes.io/desired-replicas=1
+                deployment.kubernetes.io/max-replicas=2
+                deployment.kubernetes.io/revision=1
+Controlled By:  Deployment/helloworld-deployment
+Replicas:       1 current / 1 desired
+Pods Status:    1 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=helloworld
+           pod-template-hash=691656758
+  Containers:
+   nginx:
+    Image:        nginx:alpine
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                   Message
+  ----    ------            ----  ----                   -------
+  Normal  SuccessfulCreate  3m    replicaset-controller  Created pod: helloworld-deployment-bf5b9bc9d-86bnk
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods 
+NAME                                    READY     STATUS    RESTARTS   AGE
+helloworld-deployment-bf5b9bc9d-86bnk   1/1       Running   0          4m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+(reverse-i-search)`':h': kubectl describe rs helloworld-deployment-bf5b9bc9d
+i': history | tail -n 10st
+λ
+  608  kubectl delete rc helloworld-controller
+  609  kubectl get pods
+  610  kubectl create -f dep-helloworld.yml 
+  611  kubectl get pods
+  612  kubectl get deploy "helloworld-deployment"
+  613  kubectl describe deploy "helloworld-deployment"
+  614  kubectl get rs helloworld-deployment-bf5b9bc9d
+  615  kubectl describe rs helloworld-deployment-bf5b9bc9d
+  616  kubectl get pods 
+  617  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubect get pods --show-labels
+bash: kubect: command not found
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubect get pods --show-labelssl
+NAME                                    READY     STATUS    RESTARTS   AGE       LABELS
+helloworld-deployment-bf5b9bc9d-86bnk   1/1       Running   0          6m        app=helloworld,pod-template-hash=691656758
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods --show-labels
+history | tail -n 10
+kubectl get pods 
+history | tail -n 10
+  611  kubectl get pods
+  612  kubectl get deploy "helloworld-deployment"
+  613  kubectl describe deploy "helloworld-deployment"
+  614  kubectl get rs helloworld-deployment-bf5b9bc9d
+  615  kubectl describe rs helloworld-deployment-bf5b9bc9d
+  616  kubectl get pods 
+  617  history | tail -n 10
+  618  kubect get pods --show-labels
+  619  kubectl get pods --show-labels
+  620  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ minikube version
+minikube version: v0.25.0
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+(reverse-i-search)`':s': minikube versionc': kubectl describe rs helloworld-deployment-bf5b9bc9d
+a': kubectl scale rc helloworld-controller --replicas 3
+l
+λdeploymentdelployment
+deployment "helloworld-deployment" scaled
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl scale deployment helloworld-deployment --replicas 3
+minikube versionkubectl get pods
+NAME                                    READY     STATUS    RESTARTS   AGE
+helloworld-deployment-bf5b9bc9d-86bnk   1/1       Running   0          11m
+helloworld-deployment-bf5b9bc9d-bhrth   1/1       Running   0          16s
+helloworld-deployment-bf5b9bc9d-dtjfb   1/1       Running   0          16s
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl export se deployment "helloworld-deployment" type=NodePPort-type=NodePort-type=NodePort
+service "helloworld-deployment" exposed
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get serivice "helloworld-deployment"
+NAME                    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+helloworld-deployment   NodePort   10.96.22.151   <none>        80:31973/TCP   1m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get service "helloworld-deployment"vc 8"helloworld-deployment"
+NAME                    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+helloworld-deployment   NodePort   10.96.22.151   <none>        80:31973/TCP   1m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ minikube ip
+There is a newer version of minikube available (v0.28.2).  Download it here:
+https://github.com/kubernetes/minikube/releases/tag/v0.28.2
+
+To disable this notification, run the following:
+minikube config set WantUpdateNotification false
+192.168.99.100
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+λ minikube ip
+kubectl get svc "helloworld-deployment"
+ervice
+expose deployment "helloworld-deployment" --type=NodePort
+get podsscale deployment helloworld-deployment --replicas 3
+minikube version
+history | tail -n 10
+kubectl get pods --show-labels
+history | tail -n 10
+  619  kubectl get pods --show-labels
+  620  history | tail -n 10
+  621  minikube version
+  622  kubectl scale deployment helloworld-deployment --replicas 3
+  623  kubectl get pods
+  624  kubectl expose deployment "helloworld-deployment" --type=NodePort
+  625  kubectl get service "helloworld-deployment"
+  626  kubectl get svc "helloworld-deployment"
+  627  minikube ip
+  628  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ history | tail -n 10
+minikube ip
+kubectl get svc "helloworld-deployment"
+ervice
+vc
+NAME                    TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+helloworld-deployment   NodePort   10.96.22.151   <none>        80:31973/TCP   3m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl eget pods
+NAME                                    READY     STATUS    RESTARTS   AGE
+helloworld-deployment-bf5b9bc9d-86bnk   1/1       Running   0          21m
+helloworld-deployment-bf5b9bc9d-bhrth   1/1       Running   0          10m
+helloworld-deployment-bf5b9bc9d-dtjfb   1/1       Running   0          10m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get podssvc "helloworld-deployment"describe
+Name:                     helloworld-deployment
+Namespace:                default
+Labels:                   app=helloworld
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     NodePort
+IP:                       10.96.22.151
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  31973/TCP
+Endpoints:                172.17.0.10:80,172.17.0.3:80,172.17.0.6:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+λ kubectl describe svc "helloworld-deployment"
+get podssvc "helloworld-deployment"
+history | tail -n 10
+minikube ip
+kubectl get svc "helloworld-deployment"
+ervice
+expose deployment "helloworld-deployment" --type=NodePort
+get podsscale deployment helloworld-deployment --replicas 35
+deployment "helloworld-deployment" scaled
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl scale deployment helloworld-deployment --replicas 5
+describe svc "helloworld-deployment"
+get podsdescribe svc "helloworld-deployment"
+Name:                     helloworld-deployment
+Namespace:                default
+Labels:                   app=helloworld
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     NodePort
+IP:                       10.96.22.151
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  31973/TCP
+Endpoints:                172.17.0.10:80,172.17.0.12:80,172.17.0.13:80 + 2 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe svc "helloworld-deployment"
+scale deployment helloworld-deployment --replicas 51
+deployment "helloworld-deployment" scaled
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl scale deployment helloworld-deployment --replicas 1
+describe svc "helloworld-deployment"
+Name:                     helloworld-deployment
+Namespace:                default
+Labels:                   app=helloworld
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     NodePort
+IP:                       10.96.22.151
+Port:                     <unset>  80/TCP
+TargetPort:               80/TCP
+NodePort:                 <unset>  31973/TCP
+Endpoints:                172.17.0.3:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe svc "helloworld-deployment"
+scale deployment helloworld-deployment --replicas 1
+describe svc "helloworld-deployment"
+scale deployment helloworld-deployment --replicas 5
+describe svc "helloworld-deployment"
+get podssvc "helloworld-deployment"
+history | tail -n 10
+minikube ip
+history | tail -n 10
+  627  minikube ip
+  628  history | tail -n 10
+  629  kubectl get svc "helloworld-deployment"
+  630  kubectl get pods
+  631  kubectl describe svc "helloworld-deployment"
+  632  kubectl scale deployment helloworld-deployment --replicas 5
+  633  kubectl describe svc "helloworld-deployment"
+  634  kubectl scale deployment helloworld-deployment --replicas 1
+  635  kubectl describe svc "helloworld-deployment"
+  636  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ history | tail -n 1020
+  618  kubect get pods --show-labels
+  619  kubectl get pods --show-labels
+  620  history | tail -n 10
+  621  minikube version
+  622  kubectl scale deployment helloworld-deployment --replicas 3
+  623  kubectl get pods
+  624  kubectl expose deployment "helloworld-deployment" --type=NodePort
+  625  kubectl get service "helloworld-deployment"
+  626  kubectl get svc "helloworld-deployment"
+  627  minikube ip
+  628  history | tail -n 10
+  629  kubectl get svc "helloworld-deployment"
+  630  kubectl get pods
+  631  kubectl describe svc "helloworld-deployment"
+  632  kubectl scale deployment helloworld-deployment --replicas 5
+  633  kubectl describe svc "helloworld-deployment"
+  634  kubectl scale deployment helloworld-deployment --replicas 1
+  635  kubectl describe svc "helloworld-deployment"
+  636  history | tail -n 10
+  637  history | tail -n 20
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ minikube docker-env
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="C:\Users\Dell lap\.minikube\certs"
+export DOCKER_API_VERSION="1.23"
+# Run this command to configure your shell:
+# eval $(minikube docker-env)
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ clear
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ dockerkubectl set --help
+Configure application resources 
+
+These commands help you make changes to existing application resources.
+
+Available Commands:
+  env            Update environment variables on a pod template
+  image          Update image of a pod template
+  resources      Update resource requests/limits on objects with pod templates
+  selector       Set the selector on a resource
+  serviceaccount Update ServiceAccount of a resource
+  subject        Update User, Group or ServiceAccount in a
+RoleBinding/ClusterRoleBinding
+
+Usage:
+  kubectl set SUBCOMMAND [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all
+commands).
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set --help
+clear
+kubectl set --helpget deployments
+NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+helloworld-deployment   1         1         1            1           1h
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ docker set kubectl set deployimadeploy hlelloworld-edeployment image nginx=httpd
+error: unknown command "deploy helloworld-deployment image nginx=httpd"
+See 'kubectl set -h' for help and examples.
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set deploy helloworld-deployment image nginx=httpd image nginx=httpdnginx=httpdnginx=httpdnginx=httpdnginx=httpdnginx=httpd
+deployment "helloworld-deployment" image updated
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods
+NAME                                     READY     STATUS    RESTARTS   AGE
+helloworld-deployment-668747db9f-v9zfl   1/1       Running   0          20s
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get podsset image  deploy helloworld-deployment nginx=httpdadityaprabhaakara/app
+deployment "helloworld-deployment" image updated
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ minikube servie ce hel"helloworld-deployment" --url
+http://192.168.99.100:31973
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ minikube service "helloworld-deployment" --url
+kubectl set image  deploy helloworld-deployment nginx=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/appc=adityaprabhakara/appo=adityaprabhakara/appn=adityaprabhakara/appt=adityaprabhakara/appa=adityaprabhakara/appi=adityaprabhakara/appn=adityaprabhakara/appe=adityaprabhakara/appr=adityaprabhakara/appn=adityaprabhakara/appa=adityaprabhakara/appm=adityaprabhakara/ap
+pe=adityaprabhakara/a
+p=adityaprabhakara/ap
+=adityaprabhakara/app
+=adityaprabhakara/app
+=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/app=adityaprabhakara/appn=adityaprabhakara/appg=adityaprabhakara/appi=adityaprabhakara/appn=adityaprabhakara/appx=adityaprabhakara/app
+minikube service "helloworld-deployment" --url
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ rokubectl srollout status deploym hellowor-ld-deploymneent
+deployment "helloworld-deployment" successfully rolled out
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl csacle cale deploy helloworld-deployment --replicas 10
+deployment "helloworld-deployment" scaled
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl scale deploy helloworld-deployment --replicas 10
+rollout status deploy helloworld-deployment
+minikube service "helloworld-deployment" --url
+kubectl set image  deploy helloworld-deployment nginx=adityaprabhakara/apphttpd
+deployment "helloworld-deployment" image updated
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set image  deploy helloworld-deployment nginx=httpd
+cale deploy helloworld-deployment --replicas 10
+rollout status deploy helloworld-deployment
+Waiting for rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 2 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 3 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 9 of 10 updated replicas are available...
+deployment "helloworld-deployment" successfully rolled out
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+(reverse-i-search)`':h': kubectl rollout status deploy helloworld-deployment
+i': history | tail -n 20st
+λ10
+  642  kubectl set deploy helloworld-deployment image nginx=httpd
+  643  kubectl set image  deploy helloworld-deployment nginx=httpd
+  644  kubectl get pods
+  645  kubectl set image  deploy helloworld-deployment nginx=adityaprabhakara/app
+  646  minikube service "helloworld-deployment" --url
+  647  kubectl rollout status deploy helloworld-deployment
+  648  kubectl scale deploy helloworld-deployment --replicas 10
+  649  kubectl set image  deploy helloworld-deployment nginx=httpd
+  650  kubectl rollout status deploy helloworld-deployment
+  651  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ history | tail -n 10
+kubectl rollout status deploy helloworld-deploymentmentundoyment
+deployment "helloworld-deployment" 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout undo deploy helloworld-deployment
+history | tail -n 10
+kubectl rollout status deploy helloworld-deployment
+Waiting for rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 4 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 5 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 6 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 7 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 8 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 9 out of 10 new replicas have been updated...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 1 old replicas are pending termination...
+Waiting for rollout to finish: 9 of 10 updated replicas are available...
+deployment "helloworld-deployment" successfully rolled out
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout status deploy helloworld-deployment
+undo
+history | tail -n 10
+  645  kubectl set image  deploy helloworld-deployment nginx=adityaprabhakara/app
+  646  minikube service "helloworld-deployment" --url
+  647  kubectl rollout status deploy helloworld-deployment
+  648  kubectl scale deploy helloworld-deployment --replicas 10
+  649  kubectl set image  deploy helloworld-deployment nginx=httpd
+  650  kubectl rollout status deploy helloworld-deployment
+  651  history | tail -n 10
+  652  kubectl rollout undo deploy helloworld-deployment
+  653  kubectl rollout status deploy helloworld-deployment
+  654  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout hsitoistory deploy helloworld-deployment
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+1         <none>
+4         <none>
+5         <none>
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl depllete deploy hhelloworld-deployment
+deployment "helloworld-deployment" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+(reverse-i-search)`':c': kubectl get podsr': kubectl describe svc "helloworld-deployment"e': kubectl create -f dep-helloworld.yml ate
+λ
+λ kubectl create -f dep-helloworld.yml  - - r e c o r d 
+deployment "helloworld-deployment" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create -f dep-helloworld.yml --record 
+get podsdelete deploy helloworld-deployment
+rollout history
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+1         kubectl.exe create --filename=dep-helloworld.yml --record=true
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+(reverse-i-search)`':u': kubectl rollout history deploy helloworld-deployment
+p': mv old ../backup
+failed reverse-i-search)`update
+reverse-i-search)`up': docker-compose -f with_build.yml up --build
+λ
+history > history.txt
+exit
+minikube ip
+kubectl get podsdeployments
+delete deployment helloworld-deployment
+get svcdelete svc helloworld-service-nodeport
+get svcdescribe svc kubernetes
+clear
+pwdcd D:docker-workshop/aug6/deployment/
+..
+kubectl create -f deployment/blog-db.yml 
+get pods -o wide
+create -f deployment/blog-wp.yml 
+get pods -o wide
+minikube service blog-wp-svc --url
+kubectl create - f deployment/blog-db-svc.yml 
+describe svc "blog-db-svc"
+lete -f deployment/blog-wp.yml 
+crea
+get svc --all-namespaces
+pods
+describe svc blog-db-sbcvc
+lete -f deployment/blog-db-svc.yml wp
+create -f deployment/blog-db-svc
+describe svc blog-db-svc
+create -f deployment/blog-wp.yml 
+delete -f deployment/blog-db-svc
+crea
+describe svc "blog-db-svc"
+get pods -n kube-system
+deployment
+svc
+minikube service kubernetes-dashboard -n kube-system --url
+ kubectl get secrets blog-secrets -o json > sec.json
+vi sec.json
+kubectl create -f
+lscd monitoring/
+lscd ..influxdb/
+lscd ..
+mv influxdb heapster
+lscd heapster
+lskubectl create -f .get pods -n kube-system
+lsvi heapster.yaml 
+cd ..
+lscd metricserver/
+lskubectl get svc -n kube-system
+cd ls -
+cd
+lscd ..
+lscd autoscaling/
+lsvi pod-scale.yml 
+cd ..
+kubectl create -f deployment/old/dep-helloworld.yml 
+get podsexec -i --tty helloworld-deployment-bf5b9bc9d-zgm2v sh
+get podsdelete helloworld-deployment-969b548b9-qpnb7
+pod helloworld-deployment-969b548b9-qpnb7
+get podsdelete -f deployment/old/dep-helloworld.yml 
+get podsdetel pod helloworld-deployment-969b548b9-qpnb7
+lete
+get podsrscdeploycreate -f autoscaling/pod-scale.yml 
+get hpapods helloworld-deployment-969b548b9-qpnb7
+describe
+wget
+kubectl get svchpapodshpa--helpnsdelete ns myspace
+cd resource-quota/
+kubectl create -f resourcequota.yml helloworld-no-quotas
+get podsdeployment -n myspace
+describe deployment helloworld-deployment -n myspace
+rs helloworld-deployment-558bfc7f45
+-n myspace helloworld-deployment-558bfc7f45 
+get deployment -n myspace
+rs
+describe rs -n myspace helloworld-deployment-558bfc7f45 
+create -f defaults.yml
+describe rs -n myspace helloworld-deployment-558bfc7f45
+lete -f helloworld-no-quotas.yml
+crea
+get deployments -n myspace
+scale deployment helloworld-deployment -n myspace --replicas 5
+get deployments -n myspace
+rs helloworld-deployment
+-f helloworld-no-quotas.yml 
+n myspace
+describe rs -n myspace helloworld-deployment-558bfc7f45
+get limits -n myspace
+describe limits limits -n myspace
+get ResourceQuota
+describe ResourceQuota compute-q
+lete -f helloworld-no-quotas.yml 
+get ResourceQuota -n myspace
+describe ResourceQuota compute-q kubectl get nodes --no-h
+eaders | awk '{print $1}' | xargs -I {} sh -c 'echo {}; kubectl describe node {} |
+ grep Allocated -A 5 | grep -ve Event -ve Allocated -ve percent -ve -- ; echo'
+ kubectl get nodes --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {};
+ kubectl describe node {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve
+percent -ve -- ; echo'pods --no-headers | awk '{print $1}' | xargs -I {} sh -c 'echo {}; 
+kubectl describe pod {} | grep Allocated -A 5 | grep -ve Event -ve Allocated -ve p
+kubectl get quota -o json
+compute-quota  -n myspace
+describe ResourceQuota compute-quota
+get contexts
+config get-contexts--helpdelete-context user1
+get-contextsset-credentials user1 --client-certificate="C:\Users\Dell lap\.mi
+nikube\user1.crt" --client-key="C:\Users\Dell lap\.minikube\user1.key"
+ontext user1 --cluster=minikube --user user1
+ctx
+get-contextsuse-context user1
+get podsconfig use-context minikube
+cd ../user/
+kubectl create - f pod-ro-role.yml 
+deleuser1-pod-ro-rolebinding
+pod-ro-role
+creauser1-pod-ro-rolebinding
+get User
+minikube stopart --extra-config=apiserver.Authorization.Mode=RBAC
+kubectl config get-contextsuse-context user1
+get podsdeployments
+history | tail -n 10
+kubectl get pvcconfig use-context minikube
+get pvcdelete pvc task-pv-claim task-pv-claim1
+ task-pv-volume
+cd ../pv-pvc/
+kubectl create -f pv-pvc.yml 
+get pvdescribe pv mysql-pv-volume
+minikube pvip
+kubectl get pvcdescribe pvc mysql-pv-claim
+lete -f pv-pvc.yml 
+crea
+describe pvc mysql-pv-claim
+create -f mysql-dep.yml 
+get podsdescribe pod mysql-544bbdcd6f-6qs5t
+get pods
+minikube addons enable default-storageclass
+kubectl delete -f mysql-dep.yml pv-pvc
+crea
+describe pvc mysql-pv-claim
+lete -f mysql-dep.yml 
+crea
+#minikube addons enable default-storageclass
+exit
+clear
+lsdocker lspscontainer ls -a
+prunecontainer prune
+image lsrmi $(docker images -a --filter=dangling=true -q)
+system prune -a
+image ls-machine env
+ container run -v "/c/Users/Dell lap/aug7":/var/log/apache2:rw --name web0
+2 -p 80 82:80 alpine_apache2
+er rm -f web02un -v "/c/Users/Dell lap/aug7":/var/log/apache2:rw --name web0
+2 -p 8082:80 alpine_apache2/code":/var/www/localhost/htdocs:
+rw --name web03 -p 8083
+exec web01 grep -i listen /etc/apache2/httpd.conf
+ls 
+network prunelsinspect stack_default
+container inspect stack_web01_1
+-machine stopart
+exit
+cd ../..
+lscleraar
+mkdir aug13
+cd
+lsminikube ip
+kubectl get podsdeployments | cut -f 1 -d " " 
+delete deployment $(kubectl get deployments | cut -f 1 -d " " )
+minikube docker-machine envenv
+eval $(minikube docker-env)
+docker version
+which docker
+clear
+docker info
+minikube version
+kubectl
+minikubeipdocker-envipstatusopart
+docker image ls
+minikube stopartipstopartdocker-env
+eval $(minikube docker-env)
+docker network lsinspect 1d9e2157d35a
+minikube ip
+cp -r ../aug6/ .
+lsmv aug6/* .
+lsrm -rf history_day*
+screendump.txt 
+lskubectl versionget podsdelete rc echoheadersnginx-ingress-controller
+get rscpodsdelete pod config-map-test
+scribe pod nginx-ingress-controller-m4j65
+lete DaemonSet/nginx-ingress-controller
+get pods
+ls pod/pod-helloworld.yml 
+kubectl create -f
+get podsdescribe pod my-nginx
+cd pod/
+lscat pod-helloworld.yml 
+kubectl get podsdescribe pod my-nginx
+get podsdelete pod my-nginx
+cd ..
+lscd rc
+lskubectl get podscreate -f rc-helloworld.yml 
+get replicationcontroller
+cpodsdelete pod helloworld-controller-4qb6v
+get pods --show-labels
+rcdelete rc helloworld-controller
+get pods
+cd ..
+kubectl create -f pod/pod-helloworld.yml 
+get pods --show-labels
+create -f rc/rc-helloworld.yml 
+get pods --show-labels
+delete pod my-nginx
+get pods --show-labels
+scale rc helloworld-controller --replicas 5
+get pods --show-labels
+rc helloworld-controller -o yaml
+history | tail -n 10
+kubectl scale rc helloworld-controller --replicas 03
+edit rc helloworld-controller
+get pods --show-labels -o wide
+cd deployment/
+lsmv *.yml old/
+cp old/dep-helloworld.yml .
+vi dep-helloworld.yml 
+cat
+mv old ../backup
+lskubectl delete rc helloworld-controller
+get podscreate -f dep-helloworld.yml 
+get podsdeploy "helloworld-deployment"
+describe
+get rs helloworld-deployment-bf5b9bc9d
+describe
+get pods 
+history | tail -n 10
+kubect get pods --show-labels
+l
+history | tail -n 10
+minikube version
+kubectl scale deployment helloworld-deployment --replicas 3
+get podsexpose deployment "helloworld-deployment" --type=NodePort
+get service "helloworld-deployment"
+vc
+minikube ip
+history | tail -n 10
+kubectl get svc "helloworld-deployment"
+podsdescribe svc "helloworld-deployment"
+scale deployment helloworld-deployment --replicas 5
+describe svc "helloworld-deployment"
+scale deployment helloworld-deployment --replicas 1
+describe svc "helloworld-deployment"
+history | tail -n 1020
+minikube docker-env
+clear
+kubectl set --helpget deployments
+set deploy helloworld-deployment image nginx=httpd
+image  deploy helloworld-deployment
+get podsset image  deploy helloworld-deployment nginx=adityaprabhakara/app
+minikube service "helloworld-deployment" --url
+kubectl rollout status deploy helloworld-deployment
+scale deploy helloworld-deployment --replicas 10
+et image  deploy helloworld-deployment nginx=httpd
+rollout status deploy helloworld-deployment
+history | tail -n 10
+kubectl rollout undo deploy helloworld-deployment
+status
+history | tail -n 10
+kubectl rollout history deploy helloworld-deployment
+delete
+get podscreate -f dep-helloworld.yml --record 
+rollout history deploy helloworld-deployment
+(reverse-i-search)`':u': kubectl rollout history deploy helloworld-deployment
+p': mv old ../backup
+failed reverse-i-search)`update
+reverse-i-search)`up': docker-compose -f with_build.yml up --build
+failed reverse-i-search)`
+λkubectl create -f--help | msger
+Create a resource from a file or from stdin. 
+
+JSON and YAML formats are accepted.
+
+Examples:
+  # Create a pod using the data in pod.json.
+  kubectl create -f ./pod.json
+  
+  # Create a pod based on the JSON passed into stdin.
+  cat pod.json | kubectl create -f -
+  
+  # Edit the data in docker-registry.yaml in JSON using the v1 API format then
+create the resource using the edited data.
+  kubectl create -f docker-registry.yaml --edit --output-version=v1 -o json
+
+Available Commands:
+  clusterrole         Create a ClusterRole.
+  clusterrolebinding  Create a ClusterRoleBinding for a particular ClusterRole
+  configmap           Create a configmap from a local file, directory or literal
+value
+  deployment          Create a deployment with the specified name.
+  namespace           Create a namespace with the specified name
+  poddisruptionbudget Create a pod disruption budget with the specified name.
+  priorityclass       Create a priorityclass with the specified name.
+  quota               Create a quota with the specified name.
+  role                Create a role with single rule.
+  rolebinding         Create a RoleBinding for a particular Role or ClusterRole
+  secret              Create a secret using specified subcommand
+  service             Create a service using specified subcommand.
+  serviceaccount      Create a service account with the specified name
+
+Options:
+      --allow-missing-template-keys=true: If true, ignore any errors in
+templates when a field or map key is missing in the template. Only applies to
+golang and jsonpath output formats.
+      --dry-run=false: If true, only print the object that would be sent,
+without sending it.
+      --edit=false: Edit the API resource before creating
+  -f, --filename=[]: Filename, directory, or URL to files to use to create the
+resource
+      --include-extended-apis=true: If true, include definitions of new APIs via
+calls to the API server. [default true]
+      --no-headers=false: When using the default or custom-column output format,
+don't print headers (default print headers).
+  -o, --output='': Output format. One of:
+json|yaml|wide|name|custom-columns=...|custom-columns-file=...|go-template=...|go-template-file=...|jsonpath=...|jsonpath-file=...
+See custom columns
+[http://kubernetes.io/docs/user-guide/kubectl-overview/#custom-columns], golang
+template [http://golang.org/pkg/text/template/#pkg-overview] and jsonpath
+template [http://kubernetes.io/docs/user-guide/jsonpath].
+      --raw='': Raw URI to POST to the server.  Uses the transport specified by
+the kubeconfig file.
+      --record=false: Record current kubectl command in the resource annotation.
+If set to false, do not record the command. If set to true, record the command.
+If not set, default to updating the existing annotation value only if one
+already exists.
+  -R, --recursive=false: Process the directory used in -f, --filename
+recursively. Useful when you want to manage related manifests organized within
+the same directory.
+      --save-config=false: If true, the configuration of current object will be
+saved in its annotation. Otherwise, the annotation will be unchanged. This flag
+is useful when you want to perform kubectl apply on this object in the future.
+  -l, --selector='': Selector (label query) to filter on, supports '=', '==',
+and '!='.(e.g. -l key1=value1,key2=value2)
+  -a, --show-all=false: When printing, show all resources (default hide
+terminated pods.)
+      --show-labels=false: When printing, show all labels as the last column
+(default hide labels column)
+      --sort-by='': If non-empty, sort list types using this field
+specification.  The field specification is expressed as a JSONPath expression
+(e.g. '{.metadata.name}'). The field in the API resource specified by this
+JSONPath expression must be an integer or a string.
+      --template='': Template string or path to template file to use when
+-o=go-template, -o=go-template-file. The template format is golang templates
+[http://golang.org/pkg/text/template/#pkg-overview].
+      --validate=true: If true, use a schema to validate the input before
+sending it
+      --windows-line-endings=true: Only relevant if --edit=true. Defaults to the
+line ending native to your platform.
+
+Usage:
+  kubectl create -f FILENAME [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all
+commands).
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create --help
+rollout history deploy helloworld-deployment
+create -f dep-helloworld.yml --record 
+rollout history deploy helloworld-deployment
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+1         kubectl.exe create --filename=dep-helloworld.yml --record=true
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set image deploy helloworld-deployment nginx=httpd
+deployment "helloworld-deployment" image updated
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set image deploy helloworld-deployment nginx=httpd
+rollout history deploy helloworld-deployment
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+1         kubectl.exe create --filename=dep-helloworld.yml --record=true
+2         kubectl.exe set image deploy helloworld-deployment nginx=httpd
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout history deploy helloworld-deployment
+set image deploy helloworld-deployment nginx=httpd
+rollout history deploy helloworld-deploymentundo
+deployment "helloworld-deployment" 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout undo deploy helloworld-deployment
+history
+undo
+kubectl rollout undo deploy helloworld-deployment
+history
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+2         kubectl.exe set image deploy helloworld-deployment nginx=httpd
+3         kubectl.exe create --filename=dep-helloworld.yml --record=true
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe deploy "helloworld-deployment"
+Name:                   helloworld-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 16 Aug 2018 16:19:10 +0530
+Labels:                 app=helloworld
+Annotations:            deployment.kubernetes.io/revision=3
+                        kubernetes.io/change-cause=kubectl.exe create --filename=dep-helloworld.yml --record=true
+Selector:               app=helloworld
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  app=helloworld
+  Containers:
+   nginx:
+    Image:        nginx:alpine
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   helloworld-deployment-bf5b9bc9d (1/1 replicas created)
+Events:
+  Type    Reason              Age               From                   Message
+  ----    ------              ----              ----                   -------
+  Normal  ScalingReplicaSet   2m                deployment-controller  Scaled up replica set helloworld-deployment-668747db9f to 1
+  Normal  ScalingReplicaSet   2m                deployment-controller  Scaled down replica set helloworld-deployment-bf5b9bc9d to 0
+  Normal  ScalingReplicaSet   59s (x2 over 5m)  deployment-controller  Scaled up replica set helloworld-deployment-bf5b9bc9d to 1
+  Normal  DeploymentRollback  59s               deployment-controller  Rolled back deployment "helloworld-deployment" to revision 1
+  Normal  ScalingReplicaSet   59s               deployment-controller  Scaled down replica set helloworld-deployment-668747db9f to 0
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe deploy "helloworld-deployment"
+rollout history deploy helloworld-deployment
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+2         kubectl.exe set image deploy helloworld-deployment nginx=httpd
+3         kubectl.exe create --filename=dep-helloworld.yml --record=true
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout history deploy helloworld-deployment
+describe deploy "helloworld-deployment"
+rollout history deploy helloworld-deployment
+dockerkubectl edit deploy helloworld-deployment
+Edit cancelled, no changes made.
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl edit deploy helloworld-deployment
+rollout history
+describe deploy "helloworld-deployment"
+rollout history deploy helloworld-deployment
+undo
+history
+set image deploy helloworld-deployment nginx=httpdadityaprabahakara/app
+deployment "helloworld-deployment" image updated
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set image deploy helloworld-deployment nginx=adityaprabhakara/app
+edit deploy helloworld-deployment
+rollout history
+describe deploy "helloworld-deployment"
+rollout history deploy helloworld-deployment
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+2         kubectl.exe set image deploy helloworld-deployment nginx=httpd
+3         kubectl.exe create --filename=dep-helloworld.yml --record=true
+4         kubectl.exe set image deploy helloworld-deployment nginx=adityaprabhakara/app
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout history deploy helloworld-deployment
+set image deploy helloworld-deployment nginx=adityaprabhakara/app
+edit deploy helloworld-deployment
+rollout history
+describe deploy "helloworld-deployment"
+rollout history deploy helloworld-deployment
+undo --toreviesionivi-help--help--help--help--help--help--help--help--help--help--help--helphelp--help--help--help--help--help--help--help--help--help--help--help--help--help--help--help--help--help | grep reiv
+Rollback to a previous rollout.
+  # Rollback to the previous deployment
+  # Rollback to daemonset revision 3
+  kubectl rollout undo daemonset/abc --to-revision=3
+  # Rollback to the previous deployment with dry-run
+      --to-revision=0: The revision to rollback to. Default to 0 (last revision).
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout undo --help | grep rev
+history deploy helloworld-deployment
+undo --help | grep rev
+history deploy helloworld-deployment
+set image deploy helloworld-deployment nginx=adityaprabhakara/app
+edit deploy helloworld-deployment
+rollout history
+describe deploy "helloworld-deployment"
+rollout history deploy helloworld-deployment
+undo t--to-reision vision=2
+deployment "helloworld-deployment" 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+λ kubectl edit deploy helloworld-deployment
+deployment "helloworld-deployment" edited
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl edit deploy helloworld-deployment
+rollout undo deploy helloworld-deployment --to-revision=2
+--help | grep rev
+history deploy helloworld-deployment
+set image deploy helloworld-deployment nginx=adityaprabhakara/app
+rollout history deploy helloworld-deployment
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+3         kubectl.exe create --filename=dep-helloworld.yml --record=true
+4         kubectl.exe set image deploy helloworld-deployment nginx=adityaprabhakara/app
+5         kubectl.exe edit deploy helloworld-deployment
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout history deploy helloworld-deployment
+edit
+rollout undo deploy helloworld-deployment --to-revision=2
+--help | grep rev
+history deploy helloworld-deployment
+set image deploy helloworld-deployment nginx=adityaprabhakara/apphttpd
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set image deploy helloworld-deployment nginx=httpd
+rollout history deploy helloworld-deployment
+edit
+Edit cancelled, no changes made.
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl edit deploy helloworld-deployment
+set image deploy helloworld-deployment nginx=httpd
+rollout history deploy helloworld-deployment
+set image deploy helloworld-deployment nginx=httpd
+rollout history deploy helloworld-deployment
+edit
+rollout history
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+3         kubectl.exe create --filename=dep-helloworld.yml --record=true
+4         kubectl.exe set image deploy helloworld-deployment nginx=adityaprabhakara/app
+5         kubectl.exe edit deploy helloworld-deployment
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl rollout history deploy helloworld-deployment
+edit
+set image deploy helloworld-deployment nginx=httpd
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl set image deploy helloworld-deployment nginx=httpd
+rollout history deploy helloworld-deployment
+deployments "helloworld-deployment"
+REVISION  CHANGE-CAUSE
+3         kubectl.exe create --filename=dep-helloworld.yml --record=true
+4         kubectl.exe set image deploy helloworld-deployment nginx=adityaprabhakara/app
+5         kubectl.exe edit deploy helloworld-deployment
+
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ vi service/hesvc-helloworld.yml 
+
+"service/svc-helloworld.yml" [dos] 15L, 294C
+▽
+  
+ #kubectl expose deployment helloworld-deployment --type=NodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-service-nodeport
+spec:
+  ports:
+  - port: 8888
+    nodePort: 31001
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: helloworld
+  type: NodePort
+~                                                                                  
+~                                                                                  
+/d/docker-workshop/aug13/service/svc-helloworld.yml [dos] (12:04 16/08/2018)1,1 All
+~@k
+   
+2
+~@k
+   
+3
+~@k
+   
+4
+~@k
+   
+5
+~@k
+   
+6
+~@k
+   2~@k   7~@k   8~@k   9~@k   
+</docker-workshop/aug13/service/svc-helloworld.yml [dos] (12:04 16/08/2018)10~@k   1~@k   0~@k   
+1
+d
+d
+  
+~                                                                                  cker-workshop/aug13/service/svc-helloworld.yml[+]5
+^[  ^[  :
+:wq
+"service/svc-helloworld.yml" [dos] 14L, 273C written
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f service/svc-helloworld.yml 
+service "helloworld-service-nodeport" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get svc
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)           AGE
+blog-db-svc                   ClusterIP   10.108.244.202   <none>        8888/TCP          7d
+blog-site-svc                 NodePort    10.101.238.139   <none>        8888:31002/TCP    8d
+blog-wp-svc                   NodePort    10.110.104.155   <none>        8888:31005/TCP    7d
+echoheaders-default           NodePort    10.110.96.108    <none>        80:30302/TCP      6d
+helloworld-deployment         NodePort    10.96.22.151     <none>        80:31973/TCP      1h
+helloworld-service-nodeport   NodePort    10.96.16.206     <none>        8888:32731/TCP    17s
+helloworld-v1                 NodePort    10.107.172.229   <none>        80:30303/TCP      6d
+helloworld-v2                 NodePort    10.105.199.147   <none>        80:30304/TCP      6d
+hpa-example                   NodePort    10.97.63.245     <none>        31999:31999/TCP   7d
+kubernetes                    ClusterIP   10.96.0.1        <none>        443/TCP           186d
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get svchelloworld-service-nodeport helloworld-service-nodeport
+NAME                          TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+helloworld-service-nodeport   NodePort   10.96.16.206   <none>        8888:32731/TCP   39s
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get svc helloworld-service-nodeport
+create -f service/svc-helloworld.yml delete
+service "helloworld-service-nodeport" deleted
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete -f service/svc-helloworld.yml 
+get svc helloworld-service-nodeport
+create -f service/svc-helloworld.yml 
+The Service "helloworld-service-nodeport" is invalid: spec.ports[0].nodePort: Invalid value: 37000: provided port is not in the valid range. The range of valid ports is 30000-32767
+Dell lap@Dell /d/docker-workshop/aug13
+λ 2768kubectl create -f service/svc-helloworld.yml 
+dele
+crea
+service "helloworld-service-nodeport" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl describe svc "helloworld-service-nodeport"
+Name:                     helloworld-service-nodeport
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     NodePort
+IP:                       10.105.130.122
+Port:                     <unset>  8888/TCP
+TargetPort:               nginxport/TCP
+NodePort:                 <unset>  31001/TCP
+Endpoints:                172.17.0.3:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete -f deployment/hedep-helloworld.yml 
+deployment "helloworld-deployment" deleted
+service "helloworld-service-nodeport" deleted
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete -f deployment/dep-helloworld.yml crea
+deployment "helloworld-deployment" created
+service "helloworld-service-nodeport" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ curl
+curl: try 'curl --help' or 'curl --manual' for more information
+Dell lap@Dell /d/docker-workshop/aug13
+λ curl 192.168.99.100:31001
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+Dell lap@Dell /d/docker-workshop/aug13
+λ curl 192.168.99.100:31001
+kubectl create -f deployment/dep-helloworld.yml 
+dele
+scribe svc "helloworld-service-nodeport"
+create -f service/svc-helloworld.yml 
+describe svc "helloworld-service-nodeport"
+create -f service/svc-helloworld.yml 
+dele
+get svc helloworld-service-nodeport
+NAME                          TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+helloworld-service-nodeport   NodePort   10.109.37.208   <none>        8888:31001/TCP   3m
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get pods -o wide
+NAME                                    READY     STATUS    RESTARTS   AGE       IP           NODE
+helloworld-deployment-bf5b9bc9d-6hrsh   1/1       Running   0          5m        172.17.0.3   minikube
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete -f deployment/hdep-helloworld.yml 
+deployment "helloworld-deployment" deleted
+service "helloworld-service-nodeport" deleted
+Error from server (NotFound): error when stopping "deployment/dep-helloworld.yml": deployments.extensions "helloworld-deployment-beta" not found
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete -f deployment/dep-helloworld.yml crea
+deployment "helloworld-deployment" created
+deployment "helloworld-deployment-beta" created
+service "helloworld-service-nodeport" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubect del describe svc "helloworld-service-nodeport"
+Name:                     helloworld-service-nodeport
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=helloworld
+Type:                     NodePort
+IP:                       10.103.103.13
+Port:                     <unset>  8888/TCP
+TargetPort:               nginxport/TCP
+NodePort:                 <unset>  31001/TCP
+Endpoints:                172.17.0.3:80,172.17.0.6:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  monitoring/
+aug6/            pinger/
+autoscaling/     pod/
+backup/          pv-pvc/
+code/            rc/
+configmap/       resource-quota/
+deployment/      sec.json
+heapster/        service/
+ingress/         stack/
+kube-on-aws/     user/
+metricserver/
+Dell lap@Dell /d/docker-workshop/aug13
+λ 
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd deployment/
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ ls
+dep-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ vi dep-helloworld.yml 
+
+"dep-helloworld.yml"
+<elloworld.yml" [dos] 51L, 911C
+▽
+  
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:labels:app: helloworld
+    spec:containers:- name: nginximage: nginx:alpineports:
+<world.yml [dos] (17:32 16/08/2018)1,11 TopG 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-service-nodeport
+spec:
+  ports:
+  - port: 8888
+    nodePort: 31001
+    targetPort: nginxport
+    protocol: TCP
+  selector:
+    app: helloworld
+  type: NodePort
+<rld.yml [dos] (17:32 16/08/2018)51,0-1 Bot
+~@k
+   
+world.yml [dos] (17:32 16/08/2018)50,
+~@k
+   
+49
+~@k
+   
+8
+~@k
+   
+7
+~@k
+   
+6
+~@k
+   
+5
+~@k
+   
+4
+~@k
+   
+3
+~@k
+   
+2
+~@k
+   
+1,1 97%
+~@k
+   
+containerPort: 800,1 94
+~@k
+   
+- name: nginxport39,1 91
+~@k
+   
+ports:8,1 88
+~@k
+   
+image: httpd7,1 86
+~@k
+   
+- name: nginxrld.yml [dos] (17:32 16/08/2018)36,0-1 83
+~@k
+   
+containers:world.yml [dos] (17:32 16/08/2018)35,1 80
+~@k
+   
+spec:4,1 77
+~@k
+   
+app: helloworld3,1 75
+~@k
+   
+labels:2,1 72
+~@k
+   
+metadata:1,1 69
+~@k
+   
+template:0,1 66
+~@k
+   
+replicas: 129,1 63
+~@k
+   
+spec:8,1 61
+~@k
+   
+name: helloworld-deployment-beta7,1 58
+~@k
+   
+metadata:6,1 55
+~@k
+   
+kind: Deployment5,1 52
+~@k
+   
+apiVersion: extensions/v1beta14,1 50
+:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ docker ls
+blog-db.yml  dep-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get deployments
+NAME                         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+helloworld-deployment        1         1         1            1           16h
+helloworld-deployment-beta   1         1         1            1           16h
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete depmloyment helloworld-dep
+loyment helloworld-deployment-beta
+deployment "helloworld-deployment" deleted
+deployment "helloworld-deployment-beta" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get svc
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)           AGE
+blog-db-svc                   ClusterIP   10.108.244.202   <none>        8888/TCP          7d
+blog-site-svc                 NodePort    10.101.238.139   <none>        8888:31002/TCP    8d
+blog-wp-svc                   NodePort    10.110.104.155   <none>        8888:31005/TCP    7d
+echoheaders-default           NodePort    10.110.96.108    <none>        80:30302/TCP      6d
+helloworld-deployment         NodePort    10.96.22.151     <none>        80:31973/TCP      19h
+helloworld-service-nodeport   NodePort    10.103.103.13    <none>        8888:31001/TCP    16h
+helloworld-v1                 NodePort    10.107.172.229   <none>        80:30303/TCP      6d
+helloworld-v2                 NodePort    10.105.199.147   <none>        80:30304/TCP      6d
+hpa-example                   NodePort    10.97.63.245     <none>        31999:31999/TCP   7d
+kubernetes                    ClusterIP   10.96.0.1        <none>        443/TCP           187d
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kub
+λ kub
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get svc
+NAME                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)           AGE
+blog-db-svc                   ClusterIP   10.108.244.202   <none>        8888/TCP          7d
+blog-site-svc                 NodePort    10.101.238.139   <none>        8888:31002/TCP    8d
+blog-wp-svc                   NodePort    10.110.104.155   <none>        8888:31005/TCP    7d
+echoheaders-default           NodePort    10.110.96.108    <none>        80:30302/TCP      6d
+helloworld-deployment         NodePort    10.96.22.151     <none>        80:31973/TCP      19h
+helloworld-service-nodeport   NodePort    10.103.103.13    <none>        8888:31001/TCP    16h
+helloworld-v1                 NodePort    10.107.172.229   <none>        80:30303/TCP      6d
+helloworld-v2                 NodePort    10.105.199.147   <none>        80:30304/TCP      6d
+hpa-example                   NodePort    10.97.63.245     <none>        31999:31999/TCP   7d
+kubernetes                    ClusterIP   10.96.0.1        <none>        443/TCP           187d
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete svc blog-db-svc blog-site-svc blog-wp-svc echoheaders-default hell
+oworld-deployment helloworld-service-nodeport helloworld-v1 helloworld-v2 hpa-examp
+le
+service "blog-db-svc" deleted
+service "blog-site-svc" deleted
+service "blog-wp-svc" deleted
+service "echoheaders-default" deleted
+service "helloworld-deployment" deleted
+service "helloworld-service-nodeport" deleted
+service "helloworld-v1" deleted
+service "helloworld-v2" deleted
+service "hpa-example" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kuebectl get pods
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   187d
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get deployments
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create -f dbblog-db.yml 
+error: error validating "blog-db.yml": error validating data: ValidationError(Deployment.spec.template.spec.containers[0]): unknown field "environments" in io.k8s.api.core.v1.Container; if you choose to ignore these errors, turn validation off with --validate=false
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create -f blog-db.yml 
+deployment "blog-db" created
+service "blog-db-svc" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods
+NAME                      READY     STATUS    RESTARTS   AGE
+blog-db-f574f9f46-hq9cx   1/1       Running   0          2m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get podscreate -f blog-db.yml wp
+deployment "blog-wp" created
+service "blog-wp-svc" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create -f blog-wp.yml 
+get pods
+NAME                       READY     STATUS              RESTARTS   AGE
+blog-db-f574f9f46-hq9cx    1/1       Running             0          17m
+blog-wp-67c77bfc5c-7dr7n   0/1       ContainerCreating   0          4s
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods
+NAME                       READY     STATUS    RESTARTS   AGE
+blog-db-f574f9f46-hq9cx    1/1       Running   0          17m
+blog-wp-67c77bfc5c-7dr7n   1/1       Running   0          8s
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe volumendescribe pod blog-wp-67c77bfc5c-7dr7n
+Name:           blog-wp-67c77bfc5c-7dr7n
+Namespace:      default
+Node:           minikube/192.168.99.100
+Start Time:     Fri, 17 Aug 2018 10:48:53 +0530
+Labels:         app=blog-wp
+                pod-template-hash=2373369717
+Annotations:    <none>
+Status:         Running
+IP:             172.17.0.6
+Controlled By:  ReplicaSet/blog-wp-67c77bfc5c
+Containers:
+  wp-container:
+    Container ID:   docker://a0d952a864e754e4cb480a7459bc67ad3d0e678489b773a8f2cd4f95346c4136
+    Image:          wordpress:php7.0
+    Image ID:       docker-pullable://wordpress@sha256:56e4ac2358ebd1ac89d90f208e081990b8bb0a2b6cc86c037d25846b78e2a67d
+    Port:           80/TCP
+    State:          Running
+      Started:      Fri, 17 Aug 2018 10:48:55 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      WORDPRESS_DB_USER:      root
+      WORDPRESS_DB_PASSWORD:  root
+      WORDPRESS_DB_HOST:      blog-db-svc
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-ldpc4 (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  default-token-ldpc4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-ldpc4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     <none>
+Events:
+  Type    Reason                 Age   From               Message
+  ----    ------                 ----  ----               -------
+  Normal  Scheduled              2m    default-scheduler  Successfully assigned blog-wp-67c77bfc5c-7dr7n to minikube
+  Normal  SuccessfulMountVolume  2m    kubelet, minikube  MountVolume.SetUp succeeded for volume "default-token-ldpc4"
+  Normal  Pulled                 2m    kubelet, minikube  Container image "wordpress:php7.0" already present on machine
+  Normal  Created                2m    kubelet, minikube  Created container
+  Normal  Started                2m    kubelet, minikube  Started container
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl kubectl get pods
+NAME                       READY     STATUS    RESTARTS   AGE
+blog-db-f574f9f46-hq9cx    1/1       Running   0          21m
+blog-wp-67c77bfc5c-7dr7n   1/1       Running   0          4m
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get vsvc
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+blog-db-svc   NodePort    10.109.3.89     <none>        3306:32001/TCP   23m
+blog-wp-svc   NodePort    10.99.199.134   <none>        8888:32002/TCP   6m
+kubernetes    ClusterIP   10.96.0.1       <none>        443/TCP          187d
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl desvcrcribe svc blog-wp-svc
+Name:                     blog-wp-svc
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=blog-wp
+Type:                     NodePort
+IP:                       10.99.199.134
+Port:                     <unset>  8888/TCP
+TargetPort:               wp-port/TCP
+NodePort:                 <unset>  32002/TCP
+Endpoints:                172.17.0.6:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods --show-labels
+NAME                       READY     STATUS    RESTARTS   AGE       LABELS
+blog-db-f574f9f46-hq9cx    1/1       Running   0          24m       app=blog-db,pod-template-hash=913095902
+blog-wp-67c77bfc5c-7dr7n   1/1       Running   0          7m        app=blog-wp,pod-template-hash=2373369717
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe pod blog-wp-67c77bfc5c-7dr7n
+Name:           blog-wp-67c77bfc5c-7dr7n
+Namespace:      default
+Node:           minikube/192.168.99.100
+Start Time:     Fri, 17 Aug 2018 10:48:53 +0530
+Labels:         app=blog-wp
+                pod-template-hash=2373369717
+Annotations:    <none>
+Status:         Running
+IP:             172.17.0.6
+Controlled By:  ReplicaSet/blog-wp-67c77bfc5c
+Containers:
+  wp-container:
+    Container ID:   docker://a0d952a864e754e4cb480a7459bc67ad3d0e678489b773a8f2cd4f95346c4136
+    Image:          wordpress:php7.0
+    Image ID:       docker-pullable://wordpress@sha256:56e4ac2358ebd1ac89d90f208e081990b8bb0a2b6cc86c037d25846b78e2a67d
+    Port:           80/TCP
+    State:          Running
+      Started:      Fri, 17 Aug 2018 10:48:55 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      WORDPRESS_DB_USER:      root
+      WORDPRESS_DB_PASSWORD:  root
+      WORDPRESS_DB_HOST:      blog-db-svc
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-ldpc4 (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  default-token-ldpc4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-ldpc4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     <none>
+Events:
+  Type    Reason                 Age   From               Message
+  ----    ------                 ----  ----               -------
+  Normal  Scheduled              8m    default-scheduler  Successfully assigned blog-wp-67c77bfc5c-7dr7n to minikube
+  Normal  SuccessfulMountVolume  8m    kubelet, minikube  MountVolume.SetUp succeeded for volume "default-token-ldpc4"
+  Normal  Pulled                 8m    kubelet, minikube  Container image "wordpress:php7.0" already present on machine
+  Normal  Created                8m    kubelet, minikube  Created container
+  Normal  Started                8m    kubelet, minikube  Started container
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ dockkubectl logs blog-wp-67c77bfc5c-7dr7n
+WordPress not found in /var/www/html - copying now...
+Complete! WordPress has been successfully copied to /var/www/html
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.6. Set the 'ServerName' directive globally to suppress this message
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.6. Set the 'ServerName' directive globally to suppress this message
+[Fri Aug 17 05:19:06.804730 2018] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.25 (Debian) PHP/7.0.31 configured -- resuming normal operations
+[Fri Aug 17 05:19:06.851973 2018] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+172.17.0.1 - - [17/Aug/2018:05:23:24 +0000] "GET / HTTP/1.1" 302 385 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:24 +0000] "GET /wp-admin/install.php HTTP/1.1" 200 4331 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:27 +0000] "GET /wp-includes/css/buttons.min.css?ver=4.9.8 HTTP/1.1" 200 1836 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:27 +0000] "GET /wp-includes/css/dashicons.min.css?ver=4.9.8 HTTP/1.1" 200 28983 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:27 +0000] "GET /wp-includes/js/jquery/jquery.js?ver=1.12.4 HTTP/1.1" 200 34120 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:27 +0000] "GET /wp-admin/css/install.min.css?ver=4.9.8 HTTP/1.1" 200 2345 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:27 +0000] "GET /wp-admin/js/language-chooser.min.js?ver=4.9.8 HTTP/1.1" 200 590 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:27 +0000] "GET /wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1 HTTP/1.1" 200 4365 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:29 +0000] "GET /wp-admin/images/spinner.gif HTTP/1.1" 200 4448 "http://192.168.99.100:32002/wp-admin/css/install.min.css?ver=4.9.8" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:29 +0000] "GET /wp-admin/images/wordpress-logo.svg?ver=20131107 HTTP/1.1" 200 1810 "http://192.168.99.100:32002/wp-admin/css/install.min.css?ver=4.9.8" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:29 +0000] "GET /favicon.ico HTTP/1.1" 200 228 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "POST /wp-admin/install.php?step=1 HTTP/1.1" 200 2526 "http://192.168.99.100:32002/wp-admin/install.php" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "GET /wp-includes/js/underscore.min.js?ver=1.8.3 HTTP/1.1" 200 6174 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "GET /wp-admin/js/password-strength-meter.min.js?ver=4.9.8 HTTP/1.1" 200 826 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "GET /wp-includes/js/wp-util.min.js?ver=4.9.8 HTTP/1.1" 200 925 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "GET /wp-includes/js/zxcvbn-async.min.js?ver=1.0 HTTP/1.1" 200 581 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "GET /wp-admin/js/user-profile.min.js?ver=4.9.8 HTTP/1.1" 200 2657 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "GET /favicon.ico HTTP/1.1" 200 228 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:23:36 +0000] "GET /wp-includes/js/zxcvbn.min.js HTTP/1.1" 200 400374 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+sh: 1: -t: not found
+172.17.0.1 - - [17/Aug/2018:05:24:00 +0000] "POST /wp-admin/install.php?step=2 HTTP/1.1" 200 1512 "http://192.168.99.100:32002/wp-admin/install.php?step=1" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:12 +0000] "GET /favicon.ico HTTP/1.1" 404 508 "http://192.168.99.100:32002/wp-admin/install.php?step=2" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:21 +0000] "GET / HTTP/1.1" 200 18563 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:21 +0000] "GET /wp-content/themes/twentyseventeen/assets/images/header.jpg HTTP/1.1" 200 115145 "http://192.168.99.100:32002/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:21 +0000] "GET /wp-content/themes/twentyseventeen/assets/js/skip-link-focus-fix.js?ver=1.0 HTTP/1.1" 200 766 "http://192.168.99.100:32002/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:21 +0000] "GET /wp-content/themes/twentyseventeen/style.css?ver=4.9.8 HTTP/1.1" 200 16094 "http://192.168.99.100:32002/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:22 +0000] "GET /wp-content/themes/twentyseventeen/assets/js/global.js?ver=1.0 HTTP/1.1" 200 2957 "http://192.168.99.100:32002/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:22 +0000] "GET /wp-content/themes/twentyseventeen/assets/js/jquery.scrollTo.js?ver=2.1.2 HTTP/1.1" 200 2760 "http://192.168.99.100:32002/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:22 +0000] "GET /wp-includes/js/wp-embed.min.js?ver=4.9.8 HTTP/1.1" 200 1100 "http://192.168.99.100:32002/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+172.17.0.1 - - [17/Aug/2018:05:24:22 +0000] "GET /wp-includes/js/wp-emoji-release.min.js?ver=4.9.8 HTTP/1.1" 200 4733 "http://192.168.99.100:32002/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36"
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get svc
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+blog-db-svc   NodePort    10.109.3.89     <none>        3306:32001/TCP   26m
+blog-wp-svc   NodePort    10.99.199.134   <none>        8888:32002/TCP   9m
+kubernetes    ClusterIP   10.96.0.1       <none>        443/TCP          187d
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get svclogs blog-wp-67c77bfc5c-7dr7n
+describe pod
+logskubectl get svc --namespackee skkybube-system
+NAME                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
+heapster               ClusterIP   10.105.122.5     <none>        80/TCP          20d
+kube-dns               ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP   187d
+kubernetes-dashboard   NodePort    10.110.62.108    <none>        80:30000/TCP    187d
+metrics-server         ClusterIP   10.96.28.195     <none>        443/TCP         42d
+monitoring-grafana     NodePort    10.98.71.12      <none>        80:30441/TCP    20d
+monitoring-influxdb    ClusterIP   10.105.210.138   <none>        8086/TCP        20d
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 10.96.0.1010.96.0.10kubectl describe scvc -kube-dns -n kybube-sytstem
+Name:              kube-dns
+Namespace:         kube-system
+Labels:            addonmanager.kubernetes.io/mode=Reconcile
+                   k8s-app=kube-dns
+                   kubernetes.io/name=KubeDNS
+Annotations:       kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","k8s-app":"kube-dns","kubernet...
+Selector:          k8s-app=kube-dns
+Type:              ClusterIP
+IP:                10.96.0.10
+Port:              dns  53/UDP
+TargetPort:        53/UDP
+Endpoints:         172.17.0.2:53
+Port:              dns-tcp  53/TCP
+TargetPort:        53/TCP
+Endpoints:         172.17.0.2:53
+Session Affinity:  None
+Events:            <none>
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl ddelete -f db-bl0blog-db.yml 
+deployment "blog-db" deleted
+service "blog-db-svc" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create -f blog-db.yml 
+error: error validating "blog-db.yml": error validating data: ValidationError(Deployment.spec.template.spec.containers[0]): unknown field "environments" in io.k8s.api.core.v1.Container; if you choose to ignore these errors, turn validation off with --validate=false
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create -f blog-db.yml 
+deployment "blog-db" created
+service "blog-db-svc" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete -f blog-wp.yml 
+deployment "blog-wp" deleted
+service "blog-wp-svc" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete -f blog-wp.yml 
+create -f blog-db
+dele
+deployment "blog-db" deleted
+service "blog-db-svc" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete -f blog-db.yml wp
+create -f blog-db
+deployment "blog-db" created
+service "blog-db-svc" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl dexcscribe svc "blog-db-svc"
+Name:              blog-db-svc
+Namespace:         default
+Labels:            <none>
+Annotations:       <none>
+Selector:          app=blog-db
+Type:              ClusterIP
+IP:                10.111.102.182
+Port:              <unset>  8888/TCP
+TargetPort:        db-port/TCP
+Endpoints:         172.17.0.3:3306
+Session Affinity:  None
+Events:            <none>
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl create - ff blog-wp.yml 
+deployment "blog-wp" created
+service "blog-wp-svc" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ minikubeip ip
+192.168.99.100
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubkubectl desrcribe scvc "blog-wp-svc"-svc"-svc"d-svc"b-svc"
+Name:              blog-db-svc
+Namespace:         default
+Labels:            <none>
+Annotations:       <none>
+Selector:          app=blog-db
+Type:              ClusterIP
+IP:                10.111.102.182
+Port:              <unset>  8888/TCP
+TargetPort:        db-port/TCP
+Endpoints:         172.17.0.3:3306
+Session Affinity:  None
+Events:            <none>
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+λ ls
+blog-db.yml  blog-wp.yml  dep-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  code/        ingress/       pinger/  resource-quota/  user/
+aug6/            configmap/   kube-on-aws/   pod/     sec.json
+autoscaling/     deployment/  metricserver/  pv-pvc/  service/
+backup/          heapster/    monitoring/    rc/      stack/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd autoscaling/
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ ls
+pod-scale.yml
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ cd in
+bash: cd: in: No such file or directory
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ cd ingrecd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  code/        ingress/       pinger/  resource-quota/  user/
+aug6/            configmap/   kube-on-aws/   pod/     sec.json
+autoscaling/     deployment/  metricserver/  pv-pvc/  service/
+backup/          heapster/    monitoring/    rc/      stack/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd ingress/
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ ls
+echo-service.yml   helloworld-v2.yml  ingress-controller.yml
+helloworld-v1.yml  ingress.yml
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl create -f *echo-service.yml helloworld-v1.yml helloworld-v2.yml 
+error: unknown command "echo-service.yml helloworld-v1.yml helloworld-v2.yml"
+See 'kubectl create -h' for help and examples.
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl create echo-service.yml helloworld-v1.yml helloworld-v2.yml 0-f -f -f 
+replicationcontroller "echoheaders" created
+service "echoheaders-default" created
+deployment "helloworld-v1-deployment" created
+service "helloworld-v1" created
+deployment "helloworld-v2-deployment" created
+service "helloworld-v2" created
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl create -f ingress-controller.yml 
+daemonset "nginx-ingress-controller" created
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": configmaps "nginx-configuration" already exists
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": configmaps "tcp-services" already exists
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": configmaps "udp-services" already exists
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": serviceaccounts "nginx-ingress-serviceaccount" already exists
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": clusterroles.rbac.authorization.k8s.io "nginx-ingress-clusterrole" already exists
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": roles.rbac.authorization.k8s.io "nginx-ingress-role" already exists
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": rolebindings.rbac.authorization.k8s.io "nginx-ingress-role-nisa-binding" already exists
+Error from server (AlreadyExists): error when creating "ingress-controller.yml": clusterrolebindings.rbac.authorization.k8s.io "nginx-ingress-clusterrole-nisa-binding" already exists
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ vi newing.yml
+
+"newing.yml" [New File]
+▽
+  
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+/d/docker-workshop/aug13/ingress/newing.yml [unix] (05:29 01/01/1970)            0,0-1 All
+i
+ 
+-- INSERT --  0,
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+          name: test-ingress
+            annotations:
+                        nginx.ingress.kubernetes.io/rewrite-target: /
+                        spec:
+                                  rules:
+                                            - http:
+                                                          paths:
+                                                                        - path: /testpath
+                                                                                  backend:
+                                                                                          
+          serviceName: test
+                                                                                          
+                    servicePort: 80[+] [unix] (05:29 01/01/1970)14,126
+^[  5:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl create -f ingressnewingress.yml 
+ingress "test-ingress" created
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ minikube ip
+192.168.99.100
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl get svc
+NAME                  TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+blog-db-svc           ClusterIP   10.111.102.182   <none>        8888/TCP         1h
+blog-wp-svc           NodePort    10.102.177.150   <none>        8888:32002/TCP   1h
+echoheaders-default   NodePort    10.101.154.31    <none>        80:30302/TCP     5m
+helloworld-v1         NodePort    10.111.33.40     <none>        80:30303/TCP     5m
+helloworld-v2         NodePort    10.101.74.230    <none>        80:30304/TCP     5m
+kubernetes            ClusterIP   10.96.0.1        <none>        443/TCP          187d
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl get ing
+NAME               HOSTS                       ADDRESS   PORTS     AGE
+helloworld-rules   helloworld-v1.example.com             80        6d
+test-ingress       *                                     80        4m
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl describe helloworld-rules
+the server doesn't have a resource type "helloworld-rules"
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl describe helloworld-rulesihelloworld-rulesnhelloworld-rulesghelloworld-rules helloworld-rules
+Name:             helloworld-rules
+Namespace:        default
+Address:          
+Default backend:  default-http-backend:80 (<none>)
+Rules:
+  Host                       Path  Backends
+  ----                       ----  --------
+  helloworld-v1.example.com  
+                             /account   helloworld-v1:80 (<none>)
+                             /review    helloworld-v2:80 (<none>)
+Annotations:
+Events:
+  Type    Reason  Age   From                      Message
+  ----    ------  ----  ----                      -------
+  Normal  CREATE  7m    nginx-ingress-controller  Ingress default/helloworld-rules
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl svc describe helloworld-v1
+Error: unknown command "svc" for "kubectl"
+
+Did you mean this?
+	set
+
+Run 'kubectl --help' for usage.
+error: unknown command "svc" for "kubectl"
+
+Did you mean this?
+	set
+
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl svc describe helloworld-v1shelloworld-v1vhelloworld-v1chelloworld-v1 helloworld-v1
+Name:                     helloworld-v1
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=helloworld-v1
+Type:                     NodePort
+IP:                       10.111.33.40
+Port:                     http  80/TCP
+TargetPort:               80/TCP
+NodePort:                 http  30303/TCP
+Endpoints:                172.17.0.10:80
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl get ingre
+NAME               HOSTS                       ADDRESS   PORTS     AGE
+helloworld-rules   helloworld-v1.example.com             80        6d
+test-ingress       *                                     80        5m
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl describe testing test-ingress
+Name:             test-ingress
+Namespace:        default
+Address:          
+Default backend:  default-http-backend:80 (<none>)
+Rules:
+  Host  Path  Backends
+  ----  ----  --------
+  *     
+        /testpath   test:80 (<none>)
+Annotations:
+Events:
+  Type    Reason  Age   From                      Message
+  ----    ------  ----  ----                      -------
+  Normal  CREATE  5m    nginx-ingress-controller  Ingress default/test-ingress
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubecll tl delete ingress test-ingress
+ingress "test-ingress" deleted
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl delete ing test-ingress
+scrib
+get ing
+NAME               HOSTS                       ADDRESS   PORTS     AGE
+helloworld-rules   helloworld-v1.example.com             80        6d
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl get ing l describe ing helloworld-vrules
+Name:             helloworld-rules
+Namespace:        default
+Address:          
+Default backend:  default-http-backend:80 (<none>)
+Rules:
+  Host                       Path  Backends
+  ----                       ----  --------
+  helloworld-v1.example.com  
+                             /account   helloworld-v1:80 (<none>)
+                             /review    helloworld-v2:80 (<none>)
+Annotations:
+Events:
+  Type    Reason  Age   From                      Message
+  ----    ------  ----  ----                      -------
+  Normal  CREATE  9m    nginx-ingress-controller  Ingress default/helloworld-rules
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ kubectl delete -f ingress*.
+replicationcontroller "echoheaders" deleted
+service "echoheaders-default" deleted
+deployment "helloworld-v1-deployment" deleted
+service "helloworld-v1" deleted
+deployment "helloworld-v2-deployment" deleted
+service "helloworld-v2" deleted
+daemonset "nginx-ingress-controller" deleted
+configmap "nginx-configuration" deleted
+configmap "tcp-services" deleted
+configmap "udp-services" deleted
+serviceaccount "nginx-ingress-serviceaccount" deleted
+clusterrole "nginx-ingress-clusterrole" deleted
+role "nginx-ingress-role" deleted
+rolebinding "nginx-ingress-role-nisa-binding" deleted
+clusterrolebinding "nginx-ingress-clusterrole-nisa-binding" deleted
+ingress "helloworld-rules" deleted
+Error from server (NotFound): error when deleting "newingress.yml": ingresses.extensions "test-ingress" not found
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ vi ingress.yml 
+
+"ingress.yml" [dos] 20L, 488C
+▽
+  
+# An Ingress with 2 hosts and 3 endpoints
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: helloworld-rules
+  annotations:
+  nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: helloworld-v1.example.com
+    http:paths:- path: /accountbackend:serviceName: helloworld-v1servicePort: 80- path: /reviewbackend:
+/d/docker-workshop/aug13/ingress/ingress.yml [dos] (13:52 17/08/2018)              1,1 Top
+~@k
+   
+2
+~@k
+   
+3
+~@k
+   
+4
+~@k
+   
+5
+~@k
+   
+6
+~@k
+   
+7
+~@k
+   
+8
+~@k
+   
+9
+~@k
+   
+10
+~@k
+   
+1
+~@k
+   
+2
+~@k
+   
+3
+~@k
+   
+serviceName: helloworld-v2
+4,1 50%
+~@k
+   
+servicePort: 805,1 Bot
+~@k
+   
+6
+~@k
+   
+7
+~@k
+   
+8
+~@k
+   
+9
+~@k
+   
+20
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ ls
+echo-service.yml   helloworld-v2.yml  ingress-controller.yml
+helloworld-v1.yml  ingress.yml        newingress.yml
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ vi newingress.yml 
+
+"newingress.yml" [noeol][dos] 14L, 286C
+▽
+  
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:paths:- path: /testpathbackend:serviceName: testservicePort: 80
+~                                                                                         
+~                                                                                         
+~                                                                                         
+~                                                                                         
+/d/docker-workshop/aug13/ingress/newingress.yml [dos] (13:51 17/08/2018)           1,1 All
+~@k
+   
+2
+~@k
+   
+3
+~@k
+   
+4
+~@k
+   
+5
+~@k
+   
+6
+~@k
+   
+7
+~@k
+   
+8
+~@k
+   
+9
+~@k
+   
+10
+~@k
+   
+1
+~@k
+   
+2
+~@k
+   
+3
+~@k
+   
+4
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+~@k
+   
+:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/ingress
+λ 
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectctl get svc -ls
+alpine_apache2/  code/        ingress/       pinger/  resource-quota/  user/
+aug6/            configmap/   kube-on-aws/   pod/     sec.json
+autoscaling/     deployment/  metricserver/  pv-pvc/  service/
+backup/          heapster/    monitoring/    rc/      stack/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd grep nodeSelector `find .`
+grep: .: Is a directory
+grep: ./alpine_apache2: Is a directory
+grep: ./aug6: Is a directory
+grep: ./autoscaling: Is a directory
+grep: ./backup: Is a directory
+grep: ./backup/wp-all-in-one: Is a directory
+grep: ./backup/wp-split: Is a directory
+grep: ./code: Is a directory
+grep: ./configmap: Is a directory
+grep: ./deployment: Is a directory
+grep: ./heapster: Is a directory
+grep: ./ingress: Is a directory
+grep: ./kube-on-aws: Is a directory
+grep: ./metricserver: Is a directory
+grep: ./monitoring: Is a directory
+grep: ./pinger: Is a directory
+grep: ./pod: Is a directory
+grep: ./pv-pvc: Is a directory
+grep: ./rc: Is a directory
+grep: ./resource-quota: Is a directory
+grep: ./service: Is a directory
+grep: ./stack: Is a directory
+grep: ./stack/code: Is a directory
+grep: ./user: Is a directory
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd ..
+Dell lap@Dell /d/docker-workshop
+λ cd ..
+grep nodeSelector `find .`
+grep: .: Is a directory
+grep: ./aug13: Is a directory
+grep: ./aug13/alpine_apache2: Is a directory
+grep: ./aug13/aug6: Is a directory
+grep: ./aug13/autoscaling: Is a directory
+grep: ./aug13/backup: Is a directory
+grep: ./aug13/backup/wp-all-in-one: Is a directory
+grep: ./aug13/backup/wp-split: Is a directory
+grep: ./aug13/code: Is a directory
+grep: ./aug13/configmap: Is a directory
+grep: ./aug13/deployment: Is a directory
+grep: ./aug13/heapster: Is a directory
+grep: ./aug13/ingress: Is a directory
+grep: ./aug13/kube-on-aws: Is a directory
+grep: ./aug13/metricserver: Is a directory
+grep: ./aug13/monitoring: Is a directory
+grep: ./aug13/pinger: Is a directory
+grep: ./aug13/pod: Is a directory
+grep: ./aug13/pv-pvc: Is a directory
+grep: ./aug13/rc: Is a directory
+grep: ./aug13/resource-quota: Is a directory
+grep: ./aug13/service: Is a directory
+grep: ./aug13/stack: Is a directory
+grep: ./aug13/stack/code: Is a directory
+grep: ./aug13/user: Is a directory
+grep: ./aug6: Is a directory
+grep: ./aug6/alpine_apache2: Is a directory
+grep: ./aug6/autoscaling: Is a directory
+grep: ./aug6/code: Is a directory
+grep: ./aug6/configmap: Is a directory
+grep: ./aug6/deployment: Is a directory
+grep: ./aug6/deployment/old: Is a directory
+grep: ./aug6/deployment/old/wp-all-in-one: Is a directory
+grep: ./aug6/deployment/old/wp-split: Is a directory
+grep: ./aug6/heapster: Is a directory
+grep: ./aug6/ingress: Is a directory
+grep: ./aug6/kube-on-aws: Is a directory
+grep: ./aug6/metricserver: Is a directory
+grep: ./aug6/monitoring: Is a directory
+grep: ./aug6/pinger: Is a directory
+grep: ./aug6/pod: Is a directory
+grep: ./aug6/pv-pvc: Is a directory
+grep: ./aug6/rc: Is a directory
+grep: ./aug6/resource-quota: Is a directory
+grep: ./aug6/service: Is a directory
+grep: ./aug6/stack: Is a directory
+grep: ./aug6/stack/code: Is a directory
+grep: ./aug6/user: Is a directory
+grep: ./jul23-27: Is a directory
+grep: ./jul23-27/autoscaling: Is a directory
+grep: ./jul23-27/configmap: Is a directory
+grep: ./jul23-27/deployment: Is a directory
+grep: ./jul23-27/deployment/wp-all-in-one: Is a directory
+grep: ./jul23-27/deployment/wp-split: Is a directory
+grep: ./jul23-27/ingress: Is a directory
+grep: ./jul23-27/metricserver: Is a directory
+grep: ./jul23-27/monitoring: Is a directory
+grep: ./jul23-27/pod: Is a directory
+grep: ./jul23-27/rc: Is a directory
+grep: ./jul23-27/service: Is a directory
+grep: ./jul23-27/stack: Is a directory
+grep: ./jul23-27/stack/code_stuff: Is a directory
+grep: ./jul30: Is a directory
+grep: ./jul30/autoscaling: Is a directory
+grep: ./jul30/configmap: Is a directory
+grep: ./jul30/deployment: Is a directory
+./jul30/deployment/dep-helloworld.yml:#      nodeSelector:
+grep: ./jul30/deployment/wp-all-in-one: Is a directory
+grep: ./jul30/deployment/wp-split: Is a directory
+grep: ./jul30/influxdb: Is a directory
+grep: ./jul30/ingress: Is a directory
+grep: ./jul30/metricserver: Is a directory
+grep: ./jul30/monitoring: Is a directory
+grep: ./jul30/New: No such file or directory
+grep: folder: No such file or directory
+grep: ./jul30/pod: Is a directory
+grep: ./jul30/rc: Is a directory
+grep: ./jul30/resource-quota: Is a directory
+grep: ./jul30/service: Is a directory
+grep: ./jul30/user: Is a directory
+grep: ./jun7: Is a directory
+grep: ./jun7/al-apache: Is a directory
+grep: ./jun7/al-apache-code: Is a directory
+grep: ./jun7/docker: Is a directory
+grep: ./jun7/docker/docker-compose-examples: Is a directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples: No such file or directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples/al-apache: No such file or directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples/al-apache/Dockerfile: No such file or directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples/al-apache-code: No such file or directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples/al-apache-code/Dockerfile: No such file or directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples/al-apache-code/index.html: No such file or directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples/ping-image: No such file or directory
+grep: ./jun7/docker/docker-file: No such file or directory
+grep: examples/pinger.dockerfile: No such file or directory
+grep: ./jun7/k8s: Is a directory
+grep: ./jun7/k8s/autoscaling: Is a directory
+grep: ./jun7/k8s/deployment: Is a directory
+grep: ./jun7/k8s/deployment/wp-all-in-one: Is a directory
+grep: ./jun7/k8s/deployment/wp-split: Is a directory
+grep: ./jun7/k8s/ingress: Is a directory
+grep: ./jun7/k8s/metricserver: Is a directory
+grep: ./jun7/k8s/monitoring: Is a directory
+grep: ./jun7/k8s/pod: Is a directory
+grep: ./jun7/k8s/rc: Is a directory
+grep: ./jun7/k8s/service: Is a directory
+grep: ./k8s-playground-master: Is a directory
+grep: ./k8s-playground-master/.vagrant: Is a directory
+grep: ./k8s-playground-master/.vagrant/machines: Is a directory
+grep: ./k8s-playground-master/.vagrant/machines/k8s1: Is a directory
+grep: ./k8s-playground-master/.vagrant/machines/k8s1/virtualbox: Is a directory
+grep: ./k8s-playground-master/.vagrant/machines/k8s2: Is a directory
+grep: ./k8s-playground-master/.vagrant/machines/k8s2/virtualbox: Is a directory
+grep: ./k8s-playground-master/.vagrant/machines/k8s3: Is a directory
+grep: ./k8s-playground-master/.vagrant/machines/k8s3/virtualbox: Is a directory
+grep: ./k8s-playground-master/ansible: Is a directory
+grep: ./k8s-playground-master/ansible/roles: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-base: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-base/files: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-base/tasks: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-master: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-master/files: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-master/tasks: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-worker: Is a directory
+grep: ./k8s-playground-master/ansible/roles/k8s-worker/tasks: Is a directory
+grep: ./k8s-playground-master/examples: Is a directory
+grep: ./k8s-playground-master/examples/client: Is a directory
+grep: ./k8s-playground-master/examples/client/go: Is a directory
+./k8s-playground-master/examples/client/go/Makefile:kubectl run hello-client --image=hello-client --image-pull-policy=Never --restart=Never --overrides='{"apiVersion":"v1", "spec": {"nodeSelector":{"kubernetes.io/hostname":"k8s1"}}}'
+grep: ./k8s-playground-master/scripts: Is a directory
+grep: ./k8s-playground-master/xenial: Is a directory
+grep: ./k8s-playground-master/xenial/.vagrant: Is a directory
+grep: ./k8s-playground-master/xenial/.vagrant/machines: Is a directory
+grep: ./k8s-playground-master/xenial/.vagrant/machines/k8smaster: Is a directory
+grep: ./k8s-playground-master/xenial/.vagrant/machines/k8smaster/virtualbox: Is a directory
+grep: ./k8s-playground-master/xenial/.vagrant/machines/k8snode1: Is a directory
+grep: ./k8s-playground-master/xenial/.vagrant/machines/k8snode1/virtualbox: Is a directory
+grep: ./kube-workshop: Is a directory
+grep: ./kube-workshop/autoscaling: Is a directory
+grep: ./kube-workshop/ingress: Is a directory
+grep: ./kube-workshop/metricserver: Is a directory
+grep: ./kube-workshop/monitoring: Is a directory
+Binary file ./kubectl.exe matches
+grep: ./may7: Is a directory
+Binary file ./minikube.exe matches
+grep: ./nexus: Is a directory
+grep: ./nginx: Is a directory
+Dell lap@Dell /d/docker-workshop
+λ ./jul30/deployment/dep-helloworld.yml:#
+v./jul30/deployment/dep-helloworld.yml
+i./jul30/deployment/dep-helloworld.yml
+ ./jul30/deployment/dep-helloworld.yml
+
+"./jul30/deployment/dep-helloworld.yml" [noeol][dos] 35L, 628C
+▽
+  
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  template:
+    metadata:labels:app: helloworld
+    spec:containers:- name: nginximage: nginx:alpineports:- name: nginxportcontainerPort: 80
+<docker-workshop/jul30/deployment/dep-helloworld.yml [dos] (16:01 01/08/2018)1,1 Top
+G
+ 
+containerPort: 80
+#      nodeSelector:
+#        boxtype: webserver          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworld-svc
+spec:
+  ports:
+  - port: 8888
+    targetPort: nginxport
+    protocol: TCP
+  selector:
+    app: helloworld
+  type: NodePort
+<ocker-workshop/jul30/deployment/dep-helloworld.yml [dos] (16:01 01/08/2018)35,3 Bot~@k   4~@k   3~@k   
+ker-workshop/jul30/deployment/dep-helloworld.yml [dos] (16:01 01/08/2018)32,0-1
+~@k
+   ocker-workshop/jul30/deployment/dep-helloworld.yml [dos] (16:01 01/08/2018)31,3~@k   0~@k   29~@k   8~@k   7~@k   6~@k   5~@k   4~@k   3~@k   
+- name: nginxportker-workshop/jul30/deployment/dep-helloworld.yml [dos] (16:01 01/08/2018)22,0-1 94%
+~@k
+   
+ports:ocker-workshop/jul30/deployment/dep-helloworld.yml [dos] (16:01 01/08/2018)21,3 88~@k   
+image: nginx:alpine0,3 82~@k   
+- name: nginx19,3 76~@k   
+containers:8,3 70~@k   
+spec:7,3 64~@k   8~@k   9~@k   20:
+:q!
+Dell lap@Dell /d/docker-workshop
+λ vi ./jul30/deployment/dep-helloworld.yml
+
+"./jul30/deployment/dep-helloworld.yml" [noeol][dos] 35L, 628C
+▽
+  
+template:
+    metadata:labels:app: helloworld
+    spec:containers:- name: nginximage: nginx:alpineports:- name: nginxportcontainerPort: 80
+#      nodeSelector:
+#        boxtype: webserver          
+---
+apiVersion: v1
+kind: Service
+metadata:
+<ocker-workshop/jul30/deployment/dep-helloworld.yml [dos] (16:01 01/08/2018)20,3 41%^[  ^[  :
+:q!
+Dell lap@Dell /d/docker-workshop
+λ clear
+
+Dell lap@Dell /d/docker-workshop
+λ kubectl et get syssvc -n kube-system
+NAME                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
+heapster               ClusterIP   10.105.122.5     <none>        80/TCP          21d
+kube-dns               ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP   187d
+kubernetes-dashboard   NodePort    10.110.62.108    <none>        80:30000/TCP    187d
+metrics-server         ClusterIP   10.96.28.195     <none>        443/TCP         42d
+monitoring-grafana     NodePort    10.98.71.12      <none>        80:30441/TCP    21d
+monitoring-influxdb    ClusterIP   10.105.210.138   <none>        8086/TCP        21d
+Dell lap@Dell /d/docker-workshop
+λ minikube uip
+192.168.99.100
+Dell lap@Dell /d/docker-workshop
+λ cd aug13/
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  code/        ingress/       pinger/  resource-quota/  user/
+aug6/            configmap/   kube-on-aws/   pod/     sec.json
+autoscaling/     deployment/  metricserver/  pv-pvc/  service/
+backup/          heapster/    monitoring/    rc/      stack/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd metricserver/
+Dell lap@Dell /d/docker-workshop/aug13/metricserver
+λ ls
+auth-delegator.yaml  metrics-apiservice.yaml         metrics-server-service.yaml
+auth-reader.yaml     metrics-server-deployment.yaml  resource-reader.yaml
+Dell lap@Dell /d/docker-workshop/aug13/metricserver
+λ kubectl create -f ..heapstercd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls heapster/
+grafana.yaml  heapster.yaml  influxdb.yaml
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  code/        ingress/       pinger/  resource-quota/  user/
+aug6/            configmap/   kube-on-aws/   pod/     sec.json
+autoscaling/     deployment/  metricserver/  pv-pvc/  service/
+backup/          heapster/    monitoring/    rc/      stack/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd deployment/
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ lcd backup/find sec.json re* `find .
+find: ‘secre*’: No such file or directory
+.
+./alpine_apache2
+./alpine_apache2/Dockerfile
+./aug6
+./autoscaling
+./autoscaling/pod-scale.yml
+./backup
+./backup/blog-db-svc.yml
+./backup/blog-db.yml
+./backup/blog-site-svc.yml
+./backup/blog-site-with-secrets.yml
+./backup/blog-site.yml
+./backup/blog-wp.yml
+./backup/db-blog.yml
+./backup/dep-helloworld.yml
+./backup/full-blog-svc.yml
+./backup/full-blog.yml
+./backup/secrets.yml
+./backup/wp-all-in-one
+./backup/wp-all-in-one/blog-full-svc.yml
+./backup/wp-all-in-one/blog-full.yml
+./backup/wp-all-in-one/db-blog.yml
+./backup/wp-all-in-one/secrets.yml
+./backup/wp-all-in-one/wp-blog.yml
+./backup/wp-all-in-one/wp-db-split.yml
+./backup/wp-all-in-one/wp-full-blog-svc.yml
+./backup/wp-all-in-one/wp-full-blog.yml
+./backup/wp-all-in-one/wp-split-with-secret.yml
+./backup/wp-all-in-one/wp-split.yml
+./backup/wp-blog.yml
+./backup/wp-split
+./backup/wp-split/db-site.yml
+./backup/wp-split/wp-site.yml
+./code
+./code/Dockerfile
+./code/index.html
+./configmap
+./configmap/configmap-1.yml
+./configmap/pod-configmap.yml
+./deployment
+./deployment/blog-db.yml
+./deployment/blog-wp.yml
+./deployment/dep-helloworld.yml
+./heapster
+./heapster/grafana.yaml
+./heapster/heapster.yaml
+./heapster/influxdb.yaml
+./ingress
+./ingress/echo-service.yml
+./ingress/helloworld-v1.yml
+./ingress/helloworld-v2.yml
+./ingress/ingress-controller.yml
+./ingress/ingress.yml
+./ingress/newingress.yml
+./kube-on-aws
+./kube-on-aws/kube-master.sh
+./kube-on-aws/kube-node.sh
+./metricserver
+./metricserver/auth-delegator.yaml
+./metricserver/auth-reader.yaml
+./metricserver/metrics-apiservice.yaml
+./metricserver/metrics-server-deployment.yaml
+./metricserver/metrics-server-service.yaml
+./metricserver/resource-reader.yaml
+./monitoring
+./monitoring/cluster-role.yml
+./monitoring/config-map.yml
+./monitoring/prometheus-commands.txt
+./monitoring/prometheus-deployment.yml
+./monitoring/prometheus-svc.yml
+./pinger
+./pinger/Dockerfile
+./pinger/myping.sh
+./pinger/myping2.sh
+./pod
+./pod/pod-helloworld.yml
+./pv-pvc
+./pv-pvc/mysql-dep.yml
+./pv-pvc/pv-pvc.yml
+./rc
+./rc/rc-helloworld.yml
+./resource-quota
+./resource-quota/defaults.yml
+./resource-quota/helloworld-no-quotas.yml
+./resource-quota/helloworld-with-quotas.yml
+./resource-quota/resourcequota.yml
+./sec.json
+./service
+./service/svc-helloworld.yml
+./stack
+./stack/blog.yml
+./stack/code
+./stack/code/Dockerfile
+./stack/code/index.html
+./stack/history.txt
+./stack/mysql.yml
+./stack/web1.yml
+./stack/with_build.yml
+./user
+./user/pod-ro-role.yml
+./user/user1-pod-ro-rolebinding.yml
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd deployment/
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ ls
+blog-db.yml  blog-wp.yml  dep-helloworld.yml
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ back
+bash: back: command not found
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd backup..
+Dell lap@Dell /d/docker-workshop
+λ cd backupls
+admin_user.yml      index.html              newrole.yml
+alpine-Dockerfile   jul23-27/               nexus/
+aug13/              jul30/                  nginx/
+aug6/               jun7/                   nginx.conf
+cmder.zip           k8s-playground-master/  pod-reader.yml
+docker-compose.yml  kubectl.exe*            role-binding-pod-reader.yml
+Dockerfile          kube-workshop/          ubuntu-Dockerfile
+Dockerfile.txt      may7/
+DockerToolbox.exe*  minikube.exe*
+Dell lap@Dell /d/docker-workshop
+λ cd backaug13/
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  code/        ingress/       pinger/  resource-quota/  user/
+aug6/            configmap/   kube-on-aws/   pod/     sec.json
+autoscaling/     deployment/  metricserver/  pv-pvc/  service/
+backup/          heapster/    monitoring/    rc/      stack/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd backup/
+Dell lap@Dell /d/docker-workshop/aug13/backup
+λ ls
+blog-db.yml        blog-site-with-secrets.yml  full-blog.yml      wp-blog.yml
+blog-db-svc.yml    blog-wp.yml                 full-blog-svc.yml  wp-split/
+blog-site.yml      db-blog.yml                 secrets.yml
+blog-site-svc.yml  dep-helloworld.yml          wp-all-in-one/
+Dell lap@Dell /d/docker-workshop/aug13/backup
+λ vi secrets.yml 
+
+"secrets.yml" [noeol][dos] 7L, 111C
+▽
+  
+apiVersion: v1
+kind: Secret
+metadata:
+  name: blog-secrets
+type: Opaque
+data:
+  db-password: ZXhhbXBsZQ==
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+~                                                                                   
+/d/docker-workshop/aug13/backup/secrets.yml [dos] (12:04 16/08/2018)         1,1 All
+~@k
+   
+2
+~@k
+   
+3
+^[
+  
+^[
+  
+:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/backup
+λ 
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd edeployment/
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ ls
+blog-db.yml  blog-wp.yml  dep-helloworld.yml  secrets.yml
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubect create -f sedelete -f secrets.yml 
+bash: kubect: command not found
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubect delete -f secrets.yml l
+secret "blog-secrets" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete -f secrets.yml create
+secret "blog-secrets" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl decscribe secret "blog-secrets"
+Name:         blog-secrets
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+db-password:  4 bytes
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl describe secret "blog-secrets"get  -o yaml
+apiVersion: v1
+data:
+  db-password: cm9vdA==
+kind: Secret
+metadata:
+  creationTimestamp: 2018-08-17T09:41:45Z
+  name: blog-secrets
+  namespace: default
+  resourceVersion: "449726"
+  selfLink: /api/v1/namespaces/default/secrets/blog-secrets
+  uid: c1768f2f-a201-11e8-b51c-08002789a48f
+type: Opaque
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get secret "blog-secrets" -o yaml
+describe secret "blog-secrets"
+Name:         blog-secrets
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+db-password:  4 bytes
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ history | tail -n 10
+  799  cd ..
+  800  cd deployment/
+  801  ls
+  802  kubect delete -f secrets.yml 
+  803  kubectl delete -f secrets.yml 
+  804  kubectl create -f secrets.yml 
+  805  kubectl describe secret "blog-secrets"
+  806  kubectl get secret "blog-secrets" -o yaml
+  807  kubectl describe secret "blog-secrets"
+  808  history | tail -n 10
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl deellete -f dep-helloworld.yml blog-wp.yml 
+deployment "blog-wp" deleted
+service "blog-wp-svc" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete -f blog-wp.yml crea
+deployment "blog-wp" created
+service "blog-wp-svc" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods
+NAME                       READY     STATUS                       RESTARTS   AGE
+blog-db-f574f9f46-hpk78    1/1       Running                      0          2h
+blog-wp-864b497c86-5r5z8   0/1       CreateContainerConfigError   0          14s
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubect l get pods blog-wp-864b497c86-5r5z8
+NAME                       READY     STATUS                       RESTARTS   AGE
+blog-wp-864b497c86-5r5z8   0/1       CreateContainerConfigError   0          26s
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get pods blog-wp-864b497c86-5r5z8describe 
+Name:           blog-wp-864b497c86-5r5z8
+Namespace:      default
+Node:           minikube/192.168.99.100
+Start Time:     Fri, 17 Aug 2018 15:20:23 +0530
+Labels:         app=blog-wp
+                pod-template-hash=4206053742
+Annotations:    <none>
+Status:         Pending
+IP:             172.17.0.6
+Controlled By:  ReplicaSet/blog-wp-864b497c86
+Containers:
+  wp-container:
+    Container ID:   
+    Image:          wordpress:php7.0
+    Image ID:       
+    Port:           80/TCP
+    State:          Waiting
+      Reason:       CreateContainerConfigError
+    Ready:          False
+    Restart Count:  0
+    Environment:
+      WORDPRESS_DB_USER:      root
+      WORDPRESS_DB_PASSWORD:  <set to the key 'db-password' in secret 'blog'>  Optional: false
+      WORDPRESS_DB_HOST:      blog-db-svc:8888
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-ldpc4 (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          False 
+  PodScheduled   True 
+Volumes:
+  default-token-ldpc4:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-ldpc4
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     <none>
+Events:
+  Type     Reason                 Age                From               Message
+  ----     ------                 ----               ----               -------
+  Normal   Scheduled              32s                default-scheduler  Successfully assigned blog-wp-864b497c86-5r5z8 to minikube
+  Normal   SuccessfulMountVolume  31s                kubelet, minikube  MountVolume.SetUp succeeded for volume "default-token-ldpc4"
+  Normal   Pulled                 18s (x4 over 31s)  kubelet, minikube  Container image "wordpress:php7.0" already present on machine
+  Warning  Failed                 18s (x4 over 31s)  kubelet, minikube  Error: secrets "blog" not found
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+λ kubectl describe pods blog-wp-864b497c86-5r5z8
+get
+NAME                       READY     STATUS                       RESTARTS   AGE
+blog-wp-864b497c86-5r5z8   0/1       CreateContainerConfigError   0          51s
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get nodes
+NAME       STATUS    ROLES     AGE       VERSION
+minikube   Ready     <none>    187d      v1.9.0
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl get nodespods blog-wp-864b497c86-5r5z8
+describe
+get
+create -f blog-wp.yml 
+dele
+deployment "blog-wp" deleted
+service "blog-wp-svc" deleted
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ kubectl delete -f blog-wp.yml 
+get nodespods blog-wp-864b497c86-5r5z8
+describe
+get
+create -f blog-wp.yml 
+dele
+crea
+deployment "blog-wp" created
+service "blog-wp-svc" created
+Dell lap@Dell /d/docker-workshop/aug13/deployment
+λ 
+λ 
+λ d ..cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  code/        ingress/       pinger/  resource-quota/  user/
+aug6/            configmap/   kube-on-aws/   pod/     sec.json
+autoscaling/     deployment/  metricserver/  pv-pvc/  service/
+backup/          heapster/    monitoring/    rc/      stack/
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd kube-on-aws/
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ ls
+kube-master.sh*  kube-node.sh*
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ vi 
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ vi lsvi ls
+kube-master.sh*  kube-node.sh*
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ vi kube-master.sh 
+
+"kube-master.sh" [noeol][dos] 31L, 1328C
+▽
+  
+#!/bin/bash
+echo "installing docker"
+apt-get update
+apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository \
+   "deb https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable"
+apt-get update && apt-get install -y docker-ce=$(apt-cache madison docker-ce | grep 
+17.03 | head -1 | awk '{print $3}')
+echo "installing kubernetes"
+/d/docker-workshop/aug13/kube-on-aws/kube-master.sh [dos] (12:04 16/08/2018) 1,1 Top
+^[
+  
+^[
+  
+:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ kubectl dleteleegget namespaces
+NAME          STATUS    AGE
+default       Active    187d
+kube-public   Active    187d
+kube-system   Active    187d
+monitoring    Active    42d
+myspace       Active    8d
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ kubectl delete ns mysapcepace
+namespace "myspace" deleted
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ kubectl get ns
+NAME          STATUS    AGE
+default       Active    187d
+kube-public   Active    187d
+kube-system   Active    187d
+monitoring    Active    42d
+Dell lap@Dell /d/docker-workshop/aug13/kube-on-aws
+λ cd ../
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd resource-quota/
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl create -f .
+namespace "myspace" created
+resourcequota "compute-quota" created
+resourcequota "object-quota" created
+Error from server (NotFound): error when creating "defaults.yml": namespaces "myspace" not found
+Error from server (NotFound): error when creating "helloworld-no-quotas.yml": namespaces "myspace" not found
+Error from server (NotFound): error when creating "helloworld-with-quotas.yml": namespaces "myspace" not found
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl delete -f .
+namespace "myspace" deleted
+resourcequota "compute-quota" deleted
+resourcequota "object-quota" deleted
+Error from server (NotFound): error when deleting "defaults.yml": limitranges "limits" not found
+Error from server (NotFound): error when stopping "helloworld-no-quotas.yml": deployments.extensions "helloworld-deployment" not found
+Error from server (NotFound): error when stopping "helloworld-with-quotas.yml": deployments.extensions "helloworld-deployment" not found
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl resourcequota.yml 
+create -f .
+namespace "myspace" created
+resourcequota "compute-quota" created
+resourcequota "object-quota" created
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl get pods -n mysappace
+No resources found.
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl getcreate -f helloworld-no-quotas.yml 
+deployment "helloworld-deployment" created
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describeget deployment -n myspace
+NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+helloworld-deployment   1         0         0            0           26s
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ vi helloworld-deoworld-no-quotas.yml 
+
+"helloworld-no-quotas.yml" [unix] 18L, 334C
+▽
+  
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld-deployment
+  namespace: myspace
+spec:
+  replicas: 1
+  template:
+    metadata:labels:app: helloworld
+    spec:containers:- name: k8s-demoimage: nginxports:- name: nginxportcontainerPort: 80
+<shop/aug13/resource-quota/helloworld-no-quotas.yml [unix] (12:04 16/08/2018)1,1 All
+^[
+  
+^[
+  
+:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describe hdeployment helloworld-deployment
+Error from server (NotFound): deployments.extensions "helloworld-deployment" not found
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describe deployment helloworld-deployment -n myspace
+Name:                   helloworld-deployment
+Namespace:              myspace
+CreationTimestamp:      Fri, 17 Aug 2018 16:42:18 +0530
+Labels:                 app=helloworld
+Annotations:            deployment.kubernetes.io/revision=1
+Selector:               app=helloworld
+Replicas:               1 desired | 0 updated | 0 total | 0 available | 1 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  app=helloworld
+  Containers:
+   k8s-demo:
+    Image:        nginx
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type             Status  Reason
+  ----             ------  ------
+  Available        True    MinimumReplicasAvailable
+  ReplicaFailure   True    FailedCreate
+OldReplicaSets:    <none>
+NewReplicaSet:     helloworld-deployment-558bfc7f45 (0/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  1m    deployment-controller  Scaled up replica set helloworld-deployment-558bfc7f45 to 1
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl eget rs -n myspace
+NAME                               DESIRED   CURRENT   READY     AGE
+helloworld-deployment-558bfc7f45   1         0         0         1m
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describe sbrs helloworld-deployment-558bfc7f45
+Error from server (NotFound): replicasets.extensions "helloworld-deployment-558bfc7f45" not found
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describe rs helloworld-deployment-558bfc7f45
+get rs -n myspace
+NAME                               DESIRED   CURRENT   READY     AGE
+helloworld-deployment-558bfc7f45   1         0         0         1m
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl get rs -n myspace
+describe rs helloworld-deployment-558bfc7f45 -n myspace
+Name:           helloworld-deployment-558bfc7f45
+Namespace:      myspace
+Selector:       app=helloworld,pod-template-hash=1146973901
+Labels:         app=helloworld
+                pod-template-hash=1146973901
+Annotations:    deployment.kubernetes.io/desired-replicas=1
+                deployment.kubernetes.io/max-replicas=2
+                deployment.kubernetes.io/revision=1
+Controlled By:  Deployment/helloworld-deployment
+Replicas:       0 current / 1 desired
+Pods Status:    0 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=helloworld
+           pod-template-hash=1146973901
+  Containers:
+   k8s-demo:
+    Image:        nginx
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type             Status  Reason
+  ----             ------  ------
+  ReplicaFailure   True    FailedCreate
+Events:
+  Type     Reason        Age               From                   Message
+  ----     ------        ----              ----                   -------
+  Warning  FailedCreate  2m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-xw5t5" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  2m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-76mkq" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  2m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-9vdms" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  2m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-mxhcf" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  2m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-stlzs" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  2m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-tnbg8" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  2m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-8ngbv" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  1m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-tbhzv" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  1m                replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-9dvwj" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+  Warning  FailedCreate  38s (x6 over 1m)  replicaset-controller  (combined from similar events): Error creating: pods "helloworld-deployment-558bfc7f45-z9ntc" is forbidden: failed quota: compute-quota: must specify limits.cpu,limits.memory,requests.cpu,requests.memory
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl delete -f helloworld-no-quotas.yml 
+deployment "helloworld-deployment" deleted
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl create -f defaults.yml 
+limitrange "limits" created
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl create -f defaults.yml 
+delete -f helloworld-no-quota
+create -f defaulthelloworld-no-quotas.yml 
+deployment "helloworld-deployment" created
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl get pods -n mysappace
+NAME                                     READY     STATUS    RESTARTS   AGE
+helloworld-deployment-558bfc7f45-f78r8   1/1       Running   0          16s
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl get rs -n myspace
+NAME                               DESIRED   CURRENT   READY     AGE
+helloworld-deployment-558bfc7f45   1         1         1         33s
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+Name:           helloworld-deployment-558bfc7f45
+Namespace:      myspace
+Selector:       app=helloworld,pod-template-hash=1146973901
+Labels:         app=helloworld
+                pod-template-hash=1146973901
+Annotations:    deployment.kubernetes.io/desired-replicas=1
+                deployment.kubernetes.io/max-replicas=2
+                deployment.kubernetes.io/revision=1
+Controlled By:  Deployment/helloworld-deployment
+Replicas:       1 current / 1 desired
+Pods Status:    1 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=helloworld
+           pod-template-hash=1146973901
+  Containers:
+   k8s-demo:
+    Image:        nginx
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                   Message
+  ----    ------            ----  ----                   -------
+  Normal  SuccessfulCreate  44s   replicaset-controller  Created pod: helloworld-deployment-558bfc7f45-f78r8
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+kubectl scale deployment helloworld-deployment --replicas 6
+Error from server (NotFound): deployments.extensions "helloworld-deployment" not found
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl scale deployment helloworld-deployment --replicas 6 -n myspace
+deployment "helloworld-deployment" scaled
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl get pods -n myspace
+NAME                                     READY     STATUS              RESTARTS   AGE
+helloworld-deployment-558bfc7f45-f78r8   1/1       Running             0          2m
+helloworld-deployment-558bfc7f45-ldgsq   1/1       Running             0          18s
+helloworld-deployment-558bfc7f45-slwdf   0/1       ContainerCreating   0          19s
+helloworld-deployment-558bfc7f45-sv7m4   0/1       ContainerCreating   0          18s
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectkubectl get pods -n myspace
+scale deployment helloworld-deployment --replicas 6
+describe rs helloworld-deployment-558bfc7f45 -n myspace
+Name:           helloworld-deployment-558bfc7f45
+Namespace:      myspace
+Selector:       app=helloworld,pod-template-hash=1146973901
+Labels:         app=helloworld
+                pod-template-hash=1146973901
+Annotations:    deployment.kubernetes.io/desired-replicas=6
+                deployment.kubernetes.io/max-replicas=7
+                deployment.kubernetes.io/revision=1
+Controlled By:  Deployment/helloworld-deployment
+Replicas:       4 current / 6 desired
+Pods Status:    4 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=helloworld
+           pod-template-hash=1146973901
+  Containers:
+   k8s-demo:
+    Image:        nginx
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type             Status  Reason
+  ----             ------  ------
+  ReplicaFailure   True    FailedCreate
+Events:
+  Type     Reason            Age                 From                   Message
+  ----     ------            ----                ----                   -------
+  Normal   SuccessfulCreate  2m                  replicaset-controller  Created pod: helloworld-deployment-558bfc7f45-f78r8
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-k546l" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Normal   SuccessfulCreate  33s                 replicaset-controller  Created pod: helloworld-deployment-558bfc7f45-sv7m4
+  Normal   SuccessfulCreate  33s                 replicaset-controller  Created pod: helloworld-deployment-558bfc7f45-ldgsq
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-fjwdg" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-b7qv4" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-dnnpn" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Normal   SuccessfulCreate  33s                 replicaset-controller  Created pod: helloworld-deployment-558bfc7f45-slwdf
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-27l9p" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-r57lv" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-z8xt8" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-fbt2l" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Warning  FailedCreate      33s                 replicaset-controller  Error creating: pods "helloworld-deployment-558bfc7f45-l7794" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+  Warning  FailedCreate      18s (x10 over 32s)  replicaset-controller  (combined from similar events): Error creating: pods "helloworld-deployment-558bfc7f45-kfwf4" is forbidden: exceeded quota: compute-quota, requested: limits.memory=256Mi,requests.memory=256Mi, used: limits.memory=1Gi,requests.memory=1Gi, limited: limits.memory=1Gi,requests.memory=1Gi
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+get pods
+NAME                                     READY     STATUS    RESTARTS   AGE
+helloworld-deployment-558bfc7f45-f78r8   1/1       Running   0          2m
+helloworld-deployment-558bfc7f45-ldgsq   1/1       Running   0          1m
+helloworld-deployment-558bfc7f45-slwdf   1/1       Running   0          1m
+helloworld-deployment-558bfc7f45-sv7m4   1/1       Running   0          1m
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ history | tain -n 20
+bash: tain: command not found
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ history | tain -n 20l
+  835  vi helloworld-no-quotas.yml 
+  836  kubectl describe deployment helloworld-deployment
+  837  kubectl describe deployment helloworld-deployment -n myspace
+  838  kubectl get rs -n myspace
+  839  kubectl describe rs helloworld-deployment-558bfc7f45
+  840  kubectl get rs -n myspace
+  841  kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+  842  kubectl delete -f helloworld-no-quotas.yml 
+  843  kubectl create -f defaults.yml 
+  844  kubectl create -f helloworld-no-quotas.yml 
+  845  kubectl get pods -n myspace
+  846  kubectl get rs -n myspace
+  847  kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+  848  kubectl scale deployment helloworld-deployment --replicas 6
+  849  kubectl scale deployment helloworld-deployment --replicas 6 -n myspace
+  850  kubectl get pods -n myspace
+  851  kubectl describe rs helloworld-deployment-558bfc7f45 -n myspace
+  852  kubectl get pods -n myspace
+  853  history | tain -n 20
+  854  history | tail -n 20
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ history > aug17.history.txt
+Dell lap@Dell /d/docker-workshop/aug13/resource-quota
+λ 

@@ -1,0 +1,397 @@
+Dell lap@Dell ~
+λ 
+Dell lap@Dell ~
+λ minikube status
+minikube: Running
+cluster: Running
+kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.101
+Dell lap@Dell ~
+λ 
+Dell lap@Dell ~
+λ mkubectl get pods -n kube-ssystem
+NAME                                    READY     STATUS    RESTARTS   AGE
+default-http-backend-hghs8              1/1       Running   0          2h
+kube-addon-manager-minikube             1/1       Running   0          2h
+kube-dns-54cccfbdf8-d2tbv               3/3       Running   0          2h
+kubernetes-dashboard-77d8b98585-lmcwk   1/1       Running   0          2h
+nginx-ingress-controller-5292v          1/1       Running   0          2h
+storage-provisioner                     1/1       Running   0          2h
+Dell lap@Dell ~
+λ kubectl get pods -n kube-system -o wide
+NAME                                    READY     STATUS    RESTARTS   AGE       IP               NODE
+default-http-backend-hghs8              1/1       Running   0          2h        172.17.0.3       minikube
+kube-addon-manager-minikube             1/1       Running   0          2h        192.168.99.101   minikube
+kube-dns-54cccfbdf8-d2tbv               3/3       Running   0          2h        172.17.0.5       minikube
+kubernetes-dashboard-77d8b98585-lmcwk   1/1       Running   0          2h        172.17.0.2       minikube
+nginx-ingress-controller-5292v          1/1       Running   0          2h        172.17.0.4       minikube
+storage-provisioner                     1/1       Running   0          2h        192.168.99.101   minikube
+Dell lap@Dell ~
+λ kukubectl get pods -n kube-system -o widesvc 
+NAME                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE       SELECTOR
+default-http-backend   NodePort    10.100.202.203   <none>        80:30001/TCP    2h        app=default-http-backend
+kube-dns               ClusterIP   10.96.0.10       <none>        53/UDP,53/TCP   2h        k8s-app=kube-dns
+kubernetes-dashboard   NodePort    10.98.157.221    <none>        80:30000/TCP    2h        app=kubernetes-dashboard
+Dell lap@Dell ~
+λ cd /d/docker-workshop/
+Dell lap@Dell /d/docker-workshop
+λ ls
+admin_user.yml      index.html              newrole.yml
+alpine-Dockerfile   jul23-27/               nexus/
+aug13/              jul30/                  nginx/
+aug6/               jun7/                   nginx.conf
+cmder.zip           k8s-playground-master/  pod-reader.yml
+docker-compose.yml  kubectl.exe*            role-binding-pod-reader.yml
+Dockerfile          kube-workshop/          ubuntu-Dockerfile
+Dockerfile.txt      may7/
+DockerToolbox.exe*  minikube.exe*
+Dell lap@Dell /d/docker-workshop
+λ cd aug13
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  configmap/   job/           pod/             service/
+aug6/            daemonSet/   kube-on-aws/   pv-pvc/          stack/
+autoscaling/     deployment/  metricserver/  rc/              statefulset/
+backup/          heapster/    monitoring/    resource-quota/  user/
+code/            ingress/     pinger/        sec.json
+Dell lap@Dell /d/docker-workshop/aug13
+λ  cd cd heapster
+Dell lap@Dell /d/docker-workshop/aug13/heapster
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/heapster
+λ 
+Dell lap@Dell /d/docker-workshop/aug13/heapster
+λ ls
+grafana.yaml  heapster.yaml  influxdb.yaml
+Dell lap@Dell /d/docker-workshop/aug13/heapster
+λ kubectl create -f .
+deployment "monitoring-grafana" created
+service "monitoring-grafana" created
+serviceaccount "heapster" created
+deployment "heapster" created
+service "heapster" created
+deployment "monitoring-influxdb" created
+service "monitoring-influxdb" created
+Dell lap@Dell /d/docker-workshop/aug13/heapster
+λ kubectl get podspods -n kube-all-namepsspaces
+NAMESPACE     NAME                                        READY     STATUS             RESTARTS   AGE
+default       echoheaders-86brp                           1/1       Running            0          2h
+default       helloworld-v1-deployment-d788d98b5-xg66j    1/1       Running            0          2h
+default       helloworld-v2-deployment-565f848b9f-hsdql   1/1       Running            0          2h
+default       productcatalogue-g5zlz                      0/1       ImagePullBackOff   0          12m
+default       shopfront-d6w5p                             1/1       Running            0          2h
+default       stockmanager-n5mdd                          0/1       ImagePullBackOff   0          29m
+kube-system   default-http-backend-hghs8                  1/1       Running            0          2h
+kube-system   heapster-546c9964c6-nss8d                   1/1       Running            0          2m
+kube-system   kube-addon-manager-minikube                 1/1       Running            0          2h
+kube-system   kube-dns-54cccfbdf8-d2tbv                   3/3       Running            0          2h
+kube-system   kubernetes-dashboard-77d8b98585-lmcwk       1/1       Running            0          2h
+kube-system   monitoring-grafana-65757b9656-qk2vx         1/1       Running            0          2m
+kube-system   monitoring-influxdb-66946c9f58-x4vsf        1/1       Running            0          2m
+kube-system   nginx-ingress-controller-5292v              1/1       Running            0          2h
+kube-system   storage-provisioner                         1/1       Running            0          2h
+Dell lap@Dell /d/docker-workshop/aug13/heapster
+λ cd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl dleete elete -f ingress/.
+replicationcontroller "echoheaders" deleted
+service "echoheaders-default" deleted
+deployment "helloworld-v1-deployment" deleted
+service "helloworld-v1" deleted
+deployment "helloworld-v2-deployment" deleted
+service "helloworld-v2" deleted
+daemonset "nginx-ingress-controller" deleted
+configmap "nginx-configuration" deleted
+configmap "tcp-services" deleted
+configmap "udp-services" deleted
+serviceaccount "nginx-ingress-serviceaccount" deleted
+clusterrole "nginx-ingress-clusterrole" deleted
+role "nginx-ingress-role" deleted
+rolebinding "nginx-ingress-role-nisa-binding" deleted
+clusterrolebinding "nginx-ingress-clusterrole-nisa-binding" deleted
+ingress "helloworld-rules" deleted
+Error from server (NotFound): error when deleting "ingress\\newingress.yml": ingresses.extensions "test-ingress" not found
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete -f ingress/.
+cd ..
+kubectl get pods --all-namespaces
+NAMESPACE     NAME                                        READY     STATUS             RESTARTS   AGE
+default       echoheaders-86brp                           1/1       Terminating        0          2h
+default       helloworld-v2-deployment-565f848b9f-hsdql   0/1       Terminating        0          2h
+default       productcatalogue-g5zlz                      0/1       ImagePullBackOff   0          12m
+default       shopfront-d6w5p                             1/1       Running            0          2h
+default       stockmanager-n5mdd                          0/1       ImagePullBackOff   0          30m
+kube-system   default-http-backend-hghs8                  1/1       Running            0          2h
+kube-system   heapster-546c9964c6-nss8d                   1/1       Running            0          3m
+kube-system   kube-addon-manager-minikube                 1/1       Running            0          2h
+kube-system   kube-dns-54cccfbdf8-d2tbv                   3/3       Running            0          2h
+kube-system   kubernetes-dashboard-77d8b98585-lmcwk       1/1       Running            0          2h
+kube-system   monitoring-grafana-65757b9656-qk2vx         1/1       Running            0          3m
+kube-system   monitoring-influxdb-66946c9f58-x4vsf        1/1       Running            0          3m
+kube-system   nginx-ingress-controller-5292v              1/1       Running            0          2h
+kube-system   storage-provisioner                         1/1       Running            0          2h
+Dell lap@Dell /d/docker-workshop/aug13
+λ minikube ip
+192.168.99.101
+Dell lap@Dell /d/docker-workshop/aug13
+λ ckubectl create -f deployment/k
+blog-db.yml              blog-wp.yml              dep-helloworld.yml
+blog-db-withsecrets.yml  blog-wp-withsecrets.yml  secrets.yml
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f deployment/blog-qpwpdb.-withsecrets.yml secrets.yml 
+secret "blog-secrets" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f deployment/secrets.yml blog-db-withsecrets.yml 
+deployment "blog-db" created
+service "blog-db-svc" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get pods
+NAME                       READY     STATUS              RESTARTS   AGE
+blog-db-84dc577d7c-5qwjp   0/1       ContainerCreating   0          4s
+productcatalogue-g5zlz     0/1       ImagePullBackOff    0          14m
+shopfront-d6w5p            1/1       Running             0          2h
+stockmanager-n5mdd         0/1       ImagePullBackOff    0          32m
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl ge t pods
+NAME                       READY     STATUS              RESTARTS   AGE
+blog-db-84dc577d7c-5qwjp   0/1       ContainerCreating   0          13s
+productcatalogue-g5zlz     0/1       ImagePullBackOff    0          14m
+shopfront-d6w5p            1/1       Running             0          2h
+stockmanager-n5mdd         0/1       ErrImagePull        0          32m
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl delete dget rckubectl get podscreate -f deployment/blog-db-withsecrets.yml 
+get pods
+NAME                       READY     STATUS             RESTARTS   AGE
+blog-db-84dc577d7c-5qwjp   1/1       Running            0          57s
+productcatalogue-g5zlz     0/1       ImagePullBackOff   0          15m
+shopfront-d6w5p            1/1       Running            0          2h
+stockmanager-n5mdd         0/1       ImagePullBackOff   0          32m
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl get podscreate -f deployment/blog-db-withsecrets.yml wp-withsecrets.yml 
+deployment "blog-wp" created
+service "blog-wp-svc" created
+Dell lap@Dell /d/docker-workshop/aug13
+λ kubectl create -f deployment/blog-wp-withsecrets.yml 
+get podshistory | grep tail -n 15
+  498  cd heapster
+  499  ls
+  500  kubectl create -f .
+  501  kubectl get pods --all-namespaces
+  502  cd ..
+  503  kubectl delete -f ingress/.
+  504  kubectl get pods --all-namespaces
+  505  minikube ip
+  506  kubectl create -f deployment/secrets.yml 
+  507  kubectl create -f deployment/blog-db-withsecrets.yml 
+  508  kubectl get pods
+  509  kubectl get pods
+  510  kubectl get pods
+  511  kubectl create -f deployment/blog-wp-withsecrets.yml 
+  512  history | tail -n 15
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd ../metricserver/
+Dell lap@Dell /d/docker-workshop/aug13/metricserver
+λ ls
+auth-delegator.yaml  metrics-apiservice.yaml         metrics-server-service.yaml
+auth-reader.yaml     metrics-server-deployment.yaml  resource-reader.yaml
+Dell lap@Dell /d/docker-workshop/aug13/metricserver
+λ kubectl create -f .
+clusterrolebinding "metrics-server:system:auth-delegator" created
+rolebinding "metrics-server-auth-reader" created
+apiservice "v1beta1.metrics.k8s.io" created
+serviceaccount "metrics-server" created
+deployment "metrics-server" created
+service "metrics-server" created
+clusterrole "system:metrics-server" created
+clusterrolebinding "system:metrics-server" created
+Dell lap@Dell /d/docker-workshop/aug13/metricserver
+λ kubectl create -f .
+lscd metricserver/
+history | tail -n 15
+  502  cd ..
+  503  kubectl delete -f ingress/.
+  504  kubectl get pods --all-namespaces
+  505  minikube ip
+  506  kubectl create -f deployment/secrets.yml 
+  507  kubectl create -f deployment/blog-db-withsecrets.yml 
+  508  kubectl get pods
+  509  kubectl get pods
+  510  kubectl get pods
+  511  kubectl create -f deployment/blog-wp-withsecrets.yml 
+  512  history | tail -n 15
+  513  cd metricserver/
+  514  ls
+  515  kubectl create -f .
+  516  history | tail -n 15
+Dell lap@Dell /d/docker-workshop/aug13/metricserver
+λ kubectl get spods --alln kybe-ube-system
+NAME                                    READY     STATUS    RESTARTS   AGE
+default-http-backend-hghs8              1/1       Running   0          2h
+heapster-546c9964c6-nss8d               1/1       Running   0          30m
+kube-addon-manager-minikube             1/1       Running   0          2h
+kube-dns-54cccfbdf8-d2tbv               3/3       Running   0          2h
+kubernetes-dashboard-77d8b98585-lmcwk   1/1       Running   0          2h
+metrics-server-bb9ffc6b8-h84df          1/1       Running   0          14m
+monitoring-grafana-65757b9656-qk2vx     1/1       Running   0          30m
+monitoring-influxdb-66946c9f58-x4vsf    1/1       Running   0          30m
+nginx-ingress-controller-5292v          1/1       Running   0          2h
+storage-provisioner                     1/1       Running   0          2h
+Dell lap@Dell /d/docker-workshop/aug13/metricserver
+λ lcd ..
+Dell lap@Dell /d/docker-workshop/aug13
+λ ls
+alpine_apache2/  configmap/   job/           pod/             service/
+aug6/            daemonSet/   kube-on-aws/   pv-pvc/          stack/
+autoscaling/     deployment/  metricserver/  rc/              statefulset/
+backup/          heapster/    monitoring/    resource-quota/  user/
+code/            ingress/     pinger/        sec.json
+Dell lap@Dell /d/docker-workshop/aug13
+λ cd autoscaling/
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ ls
+pod-scale.yml
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ vi pod-scale.yml 
+
+"pod-scale.yml" [noeol][dos] 47L, 928C
+▽
+  
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hpa-example
+spec:
+  replicas: 1
+  template:
+    metadata:labels:app: hpa-example
+    spec:containers:- name: hpa-exampleimage: gcr.io/google_containers/hpa-exampleports:- name: http-portcontainerPort: 80resources:
+/d/docker-workshop/aug13/autoscaling/pod-scale.yml [dos] (12:04 16/08/2018)  1,1 Top
+~@k
+   
+2
+^[
+  
+^[
+  
+1:01 18
+:
+:q!
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ kubectl create -f pod-scale.yml 
+deployment "hpa-example" created
+service "hpa-example" created
+horizontalpodautoscaler "hpa-example-autoscaler" created
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ kubectl get phpa"hpa-example-autoscaler"
+the server doesn't have a resource type "hpahpa-example-autoscaler"
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ kubectl get hpa"hpa-example-autoscaler" "hpa-example-autoscaler"
+NAME                     REFERENCE                TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
+hpa-example-autoscaler   Deployment/hpa-example   <unknown> / 75%   1         10        1          37s
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ minikube service iphpa-example --url
+http://192.168.99.101:31999
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ curl http://192.168.99.101:31999
+OK!Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ kubectl get pods
+NAME                           READY     STATUS             RESTARTS   AGE
+blog-db-84dc577d7c-5qwjp       1/1       Running            0          37m
+blog-wp-6b8f7fd578-rn6ht       1/1       Running            0          32m
+hpa-example-797dfdbc87-4f7dk   1/1       Running            0          2m
+productcatalogue-g5zlz         0/1       ImagePullBackOff   0          51m
+shopfront-d6w5p                1/1       Running            0          2h
+stockmanager-n5mdd             0/1       ImagePullBackOff   0          1h
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ kubectl get describe pod hpa-example-797dfdbc87-4f7dk
+Name:           hpa-example-797dfdbc87-4f7dk
+Namespace:      default
+Node:           minikube/192.168.99.101
+Start Time:     Sat, 18 Aug 2018 11:02:19 +0530
+Labels:         app=hpa-example
+                pod-template-hash=3538986743
+Annotations:    <none>
+Status:         Running
+IP:             172.17.0.15
+Controlled By:  ReplicaSet/hpa-example-797dfdbc87
+Containers:
+  hpa-example:
+    Container ID:   docker://44c68beee7d83010a38b7ceed4fd6a40af8bba69f88c7a45fd962f4dc6cd952f
+    Image:          gcr.io/google_containers/hpa-example
+    Image ID:       docker-pullable://gcr.io/google_containers/hpa-example@sha256:581697a37f0e136db86d6b30392f0db40ce99c8248a7044c770012f4e8491544
+    Port:           80/TCP
+    State:          Running
+      Started:      Sat, 18 Aug 2018 11:03:10 +0530
+    Ready:          True
+    Restart Count:  0
+    Requests:
+      cpu:        200m
+    Environment:  <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-tzqtx (ro)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          True 
+  PodScheduled   True 
+Volumes:
+  default-token-tzqtx:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-tzqtx
+    Optional:    false
+QoS Class:       Burstable
+Node-Selectors:  <none>
+Tolerations:     <none>
+Events:
+  Type    Reason                 Age   From               Message
+  ----    ------                 ----  ----               -------
+  Normal  Scheduled              2m    default-scheduler  Successfully assigned hpa-example-797dfdbc87-4f7dk to minikube
+  Normal  SuccessfulMountVolume  2m    kubelet, minikube  MountVolume.SetUp succeeded for volume "default-token-tzqtx"
+  Normal  Pulling                2m    kubelet, minikube  pulling image "gcr.io/google_containers/hpa-example"
+  Normal  Pulled                 2m    kubelet, minikube  Successfully pulled image "gcr.io/google_containers/hpa-example"
+  Normal  Created                2m    kubelet, minikube  Created container
+  Normal  Started                2m    kubelet, minikube  Started container
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ kubectl describe pod hpa-example-797dfdbc87-4f7dk
+get pods
+NAME                           READY     STATUS             RESTARTS   AGE
+blog-db-84dc577d7c-5qwjp       1/1       Running            0          37m
+blog-wp-6b8f7fd578-rn6ht       1/1       Running            0          33m
+hpa-example-797dfdbc87-4f7dk   1/1       Running            0          3m
+productcatalogue-g5zlz         0/1       ImagePullBackOff   0          52m
+shopfront-d6w5p                1/1       Running            0          2h
+stockmanager-n5mdd             0/1       ImagePullBackOff   0          1h
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ kubectl get podsdescribe pod hpa-example-797dfdbc87-4f7dk
+get pods
+curl http://192.168.99.101:31999
+OK!Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ curl http://192.168.99.101:31999
+OK!Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ 
+(reverse-i-search)`':h': curl http://192.168.99.101:31999p': kubectl describe pod hpa-example-797dfdbc87-4f7dk
+a
+λ
+(reverse-i-search)`':
+hpaminikube service hpa-example --urlkubectl get hpa "hpa-example-autoscaler"
+λ
+NAME                     REFERENCE                TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+hpa-example-autoscaler   Deployment/hpa-example   1% / 75%   1         10        1          4m
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ minikube ip
+192.168.99.101
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ minikube sr
+(reverse-i-search)`':s': kubectl get hpa "hpa-example-autoscaler"
+e': minikube service hpa-example --urlr
+λ
+http://192.168.99.101:31999
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ minikube service hpa-example --url
+Opening kubernetes service default/hpa-example in default browser...
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ while true; do curl http://192.168.99.101:31999 ; end
+> ;
+bash: syntax error near unexpected token `;'
+Dell lap@Dell /d/docker-workshop/aug13/autoscaling
+λ while true; do curl http://192.168.99.101:31999 ;end; ;done
+OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!OK!
